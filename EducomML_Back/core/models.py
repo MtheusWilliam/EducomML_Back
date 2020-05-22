@@ -106,8 +106,11 @@ class Instructionalelementtype(models.Model):
 
 class Knowledgedomain(models.Model):
     # Field name made lowercase.
-    idknowledgedomain = models.IntegerField(
+
+    idknowledgedomain = models.AutoField(
         db_column='idKnowledgeDomain', primary_key=True)
+    # idknowledgedomain = models.IntegerField(
+    #   db_column='idKnowledgeDomain', primary_key=True)
     # Field name made lowercase.
     nameknowledgedomain = models.CharField(
         db_column='nameKnowledgeDomain', max_length=45, blank=True, null=True)
