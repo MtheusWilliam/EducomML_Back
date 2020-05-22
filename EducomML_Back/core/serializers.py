@@ -18,5 +18,5 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Knowledgedomain
-        fields = ['url', 'nameknowledgedomain',
+        fields = ['url', 'idknowledgedomain', 'nameknowledgedomain',
                   'subtitle', 'lastversion', 'author']
