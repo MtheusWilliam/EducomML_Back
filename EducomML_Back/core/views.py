@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User, Group
-from .models import Knowledgedomain
+from .models import Knowledgedomain, Module
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import UserSerializer, GroupSerializer, KnowledgedomainSerializer
+from .serializers import UserSerializer, GroupSerializer, KnowledgedomainSerializer, ModuleSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -30,3 +30,12 @@ class KnowledgedomainViewSet(viewsets.ModelViewSet):
     queryset = Knowledgedomain.objects.all()
     serializer_class = KnowledgedomainSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class ModuleViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Module.objects.all()
+    serializer_class = ModuleSerializer
+    permission_classes = [permissions.IsAuthenticated]
+

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import Knowledgedomain
+from .models import Knowledgedomain, Module
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -20,3 +20,9 @@ class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
         model = Knowledgedomain
         fields = ['url', 'idknowledgedomain', 'nameknowledgedomain',
                   'subtitle', 'lastversion', 'author']
+
+class ModuleSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Module
+        fields = ['url','idmodule','fk_idmodule', 'namemodule', 'subtitle' ,
+                  'idknowledgedomain']

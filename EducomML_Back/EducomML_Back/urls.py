@@ -5,9 +5,10 @@ from rest_framework import routers
 from core import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-router.register(r'knowledgedomain', views.KnowledgedomainViewSet)
+router.register('users', views.UserViewSet)
+router.register('groups', views.GroupViewSet)
+router.register('knowledgedomain', views.KnowledgedomainViewSet)
+router.register('Module', views.ModuleViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
