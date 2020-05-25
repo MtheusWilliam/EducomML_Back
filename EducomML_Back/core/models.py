@@ -170,10 +170,13 @@ class Mobilemedia(models.Model):
 
 class Module(models.Model):
     # Field name made lowercase.
-    idmodule = models.BigIntegerField(db_column='idModule', primary_key=True)
+    idmodule = models.AutoField(
+        db_column='idModule', primary_key=True)
     # Field name made lowercase.
     namemodule = models.CharField(db_column='nameModule', max_length=256)
     # Field name made lowercase.
+    subtitle = models.CharField(
+        db_column='subTitle', max_length=45, blank=True, null=True)
     idknowledgedomain = models.ForeignKey(
         Knowledgedomain, models.DO_NOTHING, db_column='idKnowledgeDomain', blank=True, null=True)
     # Field name made lowercase.
