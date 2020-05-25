@@ -8,7 +8,7 @@ router = routers.DefaultRouter()
 router.register('users', views.UserViewSet)
 router.register('groups', views.GroupViewSet)
 router.register('knowledgedomain', views.KnowledgedomainViewSet)
-router.register('Module', views.ModuleViewSet)
+router.register('module', views.ModuleViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
