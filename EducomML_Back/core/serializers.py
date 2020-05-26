@@ -14,15 +14,18 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ['url', 'name']
 
-
-class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Knowledgedomain
-        fields = ['url', 'idknowledgedomain', 'nameknowledgedomain',
-                  'subtitle', 'lastversion', 'author']
-
 class ModuleSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = Module
         fields = ['url','idmodule','fk_idmodule', 'namemodule', 'subtitle' ,
                   'idknowledgedomain']
+
+class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
+    modules = ModuleSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Knowledgedomain
+        fields = ['url', 'idknowledgedomain', 'nameknowledgedomain','subtitle', 'lastversion', 'author', 'modules']
+
+

@@ -178,7 +178,7 @@ class Module(models.Model):
     subtitle = models.CharField(
         db_column='subTitle', max_length=45, blank=True, null=True)
     idknowledgedomain = models.ForeignKey(
-        Knowledgedomain, models.DO_NOTHING, db_column='idKnowledgeDomain', blank=True, null=True)
+        Knowledgedomain, models.DO_NOTHING, db_column='idKnowledgeDomain', blank=True, null=True,related_name='modules')
     # Field name made lowercase.
     fk_idmodule = models.ForeignKey(
         'self', models.DO_NOTHING, db_column='fk_IdModule', blank=True, null=True)
