@@ -31,6 +31,7 @@ class KnowledgedomainViewSet(viewsets.ModelViewSet):
     serializer_class = KnowledgedomainSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+
 class ModuleViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
@@ -38,4 +39,3 @@ class ModuleViewSet(viewsets.ModelViewSet):
     queryset = Module.objects.all()
     serializer_class = ModuleSerializer
     permission_classes = [permissions.IsAuthenticated]
-

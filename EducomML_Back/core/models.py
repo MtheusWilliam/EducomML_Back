@@ -181,7 +181,7 @@ class Module(models.Model):
         Knowledgedomain, models.DO_NOTHING, db_column='idKnowledgeDomain', blank=True, null=False, related_name='modules')
     # Field name made lowercase.
     fk_idmodule = models.ForeignKey(
-        'self', models.DO_NOTHING, db_column='fk_IdModule', blank=True, null=True)
+        'self', models.DO_NOTHING, db_column='fk_IdModule', blank=True, null=True, related_name='submodules')
     visible = models.BooleanField(blank=True, null=True)
 
     class Meta:
