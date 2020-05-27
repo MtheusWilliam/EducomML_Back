@@ -178,11 +178,7 @@ class Module(models.Model):
     subtitle = models.CharField(
         db_column='subTitle', max_length=45, blank=True, null=True)
     idknowledgedomain = models.ForeignKey(
-<<<<<<< HEAD
-        Knowledgedomain, models.DO_NOTHING, db_column='idKnowledgeDomain', blank=True, null=True,related_name='modules')
-=======
-        Knowledgedomain, models.DO_NOTHING, db_column='idKnowledgeDomain', blank=True, null=False)
->>>>>>> 48a621140bb8ffd3f480464a94b6505affc85f1d
+        Knowledgedomain, models.DO_NOTHING, db_column='idKnowledgeDomain', blank=True, null=False, related_name='modules')
     # Field name made lowercase.
     fk_idmodule = models.ForeignKey(
         'self', models.DO_NOTHING, db_column='fk_IdModule', blank=True, null=True)
@@ -191,6 +187,7 @@ class Module(models.Model):
     class Meta:
         managed = False
         db_table = 'Module'
+        ordering = ['idmodule']
 
 
 class Phaseprocedure(models.Model):
