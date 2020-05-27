@@ -22,16 +22,17 @@ class Answersalternatives(models.Model):
 
 
 class Concept(models.Model):
+
     # Field name made lowercase.
-    idconcept = models.BigIntegerField(db_column='idConcept', primary_key=True)
+    idconcept = models.AutoField(db_column='idConcept', primary_key=True)
     # Field name made lowercase.
     nameconcept = models.CharField(db_column='nameConcept', max_length=256)
     # Field name made lowercase.
     fk_idconcept = models.BigIntegerField(
         db_column='fk_idConcept', blank=True, null=True)
     # Field name made lowercase.
-    fk_idkonwledgedomain = models.ForeignKey(
-        'Knowledgedomain', models.DO_NOTHING, db_column='fk_idKonwledgeDomain')
+    fk_idknowledgedomain = models.ForeignKey(
+        'Knowledgedomain', models.DO_NOTHING, db_column='fk_idKnowledgeDomain')
     # Field name made lowercase.
     fk_idmodule = models.ForeignKey(
         'Module', models.DO_NOTHING, db_column='fk_idModule')
@@ -74,7 +75,7 @@ class Informationitemtype(models.Model):
         db_table = 'InformationItemType'
 
 
-class Instrctionalelement(models.Model):
+class Instructionalelement(models.Model):
     idinstructionalelement = models.BigIntegerField(
         db_column='idInstructionalElement', primary_key=True)  # Field name made lowercase.
     # This field type is a guess.
@@ -85,7 +86,7 @@ class Instrctionalelement(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'InstrctionalElement'
+        db_table = 'InstructionalElement'
 
 
 class Instructionalelementtype(models.Model):
@@ -218,8 +219,8 @@ class Question(models.Model):
     # Field name made lowercase.
     fk_idmobilemedia = models.ForeignKey(
         Mobilemedia, models.DO_NOTHING, db_column='fk_idMobileMedia', blank=True, null=True)
-    fk_idinstrctionalelement = models.BigIntegerField(
-        db_column='fk_idInstrctionalElement', blank=True, null=True)  # Field name made lowercase.
+    fk_idinstructionalelement = models.BigIntegerField(
+        db_column='fk_idInstructionalElement', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
