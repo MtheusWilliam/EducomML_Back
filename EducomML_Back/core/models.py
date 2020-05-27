@@ -35,7 +35,7 @@ class Concept(models.Model):
         'Knowledgedomain', models.DO_NOTHING, db_column='fk_idKnowledgeDomain')
     # Field name made lowercase.
     fk_idmodule = models.ForeignKey(
-        'Module', models.DO_NOTHING, db_column='fk_idModule')
+        'Module', models.DO_NOTHING, db_column='fk_idModule', related_name='concepts')
     visible = models.BooleanField(blank=True, null=True)
 
     class Meta:

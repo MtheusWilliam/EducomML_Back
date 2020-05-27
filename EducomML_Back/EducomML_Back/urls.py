@@ -9,6 +9,7 @@ router.register('users', views.UserViewSet)
 router.register('groups', views.GroupViewSet)
 router.register('knowledgedomain', views.KnowledgedomainViewSet)
 router.register('module', views.ModuleViewSet)
+router.register('concept', views.ConceptViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
