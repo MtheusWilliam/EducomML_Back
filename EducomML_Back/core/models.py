@@ -32,15 +32,16 @@ class Concept(models.Model):
         db_column='fk_idConcept', blank=True, null=True)
     # Field name made lowercase.
     fk_idknowledgedomain = models.ForeignKey(
-        'Knowledgedomain', models.DO_NOTHING, db_column='fk_idKnowledgeDomain')
+        'Knowledgedomain', db_column='fk_idKnowledgeDomain', on_delete=models.CASCADE)
     # Field name made lowercase.
     fk_idmodule = models.ForeignKey(
-        'Module', models.DO_NOTHING, db_column='fk_idModule', related_name='concepts')
+        'Module', db_column='fk_idModule', related_name='concepts', on_delete=models.CASCADE)
     visible = models.BooleanField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'Concept'
+        ordering = ['idconcept']
 
 
 class Informationitem(models.Model):
@@ -179,10 +180,10 @@ class Module(models.Model):
     subtitle = models.CharField(
         db_column='subTitle', max_length=45, blank=True, null=True)
     idknowledgedomain = models.ForeignKey(
-        Knowledgedomain, models.DO_NOTHING, db_column='idKnowledgeDomain', blank=True, null=False, related_name='modules')
+        Knowledgedomain, db_column='idKnowledgeDomain', blank=True, null=False, related_name='modules', on_delete=models.CASCADE)
     # Field name made lowercase.
     fk_idmodule = models.ForeignKey(
-        'self', models.DO_NOTHING, db_column='fk_IdModule', blank=True, null=True, related_name='submodules')
+        'self', db_column='fk_IdModule', blank=True, null=True, related_name='submodules', on_delete=models.CASCADE)
     visible = models.BooleanField(blank=True, null=True)
 
     class Meta:
