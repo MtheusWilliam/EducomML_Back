@@ -10,6 +10,8 @@ router.register('groups', views.GroupViewSet)
 router.register('knowledgedomain', views.KnowledgedomainViewSet)
 router.register('module', views.ModuleViewSet)
 router.register('concept', views.ConceptViewSet)
+router.register('reference', views.ReferenceViewSet)
+router.register('referencetype', views.ReferencetypeViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

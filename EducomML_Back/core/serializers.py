@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import Knowledgedomain, Module, Concept
+from .models import *
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -49,3 +49,22 @@ class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
         model = Knowledgedomain
         fields = ['url', 'idknowledgedomain', 'nameknowledgedomain',
                   'subtitle', 'lastversion', 'author', 'modules']
+
+class ReferencetypeSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Referencetype
+        fields = ['url', 'idreferencetype', 'namererefencetype']
+
+
+class ReferenceSerializer(serializers.HyperlinkedModelSerializer):
+    sourceconcepts  = ConceptSerializer(many=True, read_only=True);
+    targetconcepts = ConceptSerializer(many=True, read_only=True);
+    referencetypes   = ReferencetypeSerializer(many=True, read_only=True);
+
+    class Meta:
+        model = Reference
+        fields = ['url', 'idreference',"namereference", 'sourceconcepts',
+                  'targetconcepts', 'fk_referencetype',"referencetypes"]
+
+

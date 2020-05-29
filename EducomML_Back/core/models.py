@@ -230,17 +230,17 @@ class Question(models.Model):
 
 class Reference(models.Model):
     # Field name made lowercase.
-    idreference = models.BigIntegerField(
+    idreference = models.AutoField(
         db_column='idReference', primary_key=True)
     # Field name made lowercase.
     sourceconcept = models.ForeignKey(
-        Concept, models.DO_NOTHING, db_column='sourceconcept', related_name='sourceconcept')
+        Concept, models.DO_NOTHING, db_column='sourceConcept', related_name='sourceconcepts')
     # Field name made lowercase.
     targetconcept = models.ForeignKey(
-        Concept, models.DO_NOTHING, db_column='targetconcept', related_name='targetconcept')
+        Concept, models.DO_NOTHING, db_column='targetConcept', related_name='targetconcepts')
     # Field name made lowercase.
     fk_referencetype = models.ForeignKey(
-        'Referencetype', models.DO_NOTHING, db_column='fk_ReferenceType', blank=True, null=True)
+        'Referencetype', models.DO_NOTHING, db_column='fk_ReferenceType', blank=True, null=True,related_name='referencetype')
     # Field name made lowercase.
     namereference = models.CharField(
         db_column='nameReference', max_length=256, blank=True, null=True)
@@ -252,7 +252,7 @@ class Reference(models.Model):
 
 class Referencetype(models.Model):
     # Field name made lowercase.
-    idreferencetype = models.BigIntegerField(
+    idreferencetype = models.AutoField(
         db_column='idReferenceType', primary_key=True)
     # Field name made lowercase.
     namererefencetype = models.CharField(
