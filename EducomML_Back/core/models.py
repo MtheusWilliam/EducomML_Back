@@ -234,13 +234,13 @@ class Reference(models.Model):
         db_column='idReference', primary_key=True)
     # Field name made lowercase.
     sourceconcept = models.ForeignKey(
-        Concept, models.DO_NOTHING, db_column='sourceConcept', related_name='sourceconcepts')
+        Concept, models.DO_NOTHING, db_column='sourceConcept', related_name='sourceconcept')
     # Field name made lowercase.
     targetconcept = models.ForeignKey(
-        Concept, models.DO_NOTHING, db_column='targetConcept', related_name='targetconcepts')
+        Concept, models.DO_NOTHING, db_column='targetConcept', related_name='targetconcept')
     # Field name made lowercase.
     fk_referencetype = models.ForeignKey(
-        'Referencetype', models.DO_NOTHING, db_column='fk_ReferenceType', blank=True, null=True,related_name='referencetype')
+        'Referencetype', models.DO_NOTHING, db_column='fk_ReferenceType', blank=True, null=True, related_name='referencetype')
     # Field name made lowercase.
     namereference = models.CharField(
         db_column='nameReference', max_length=256, blank=True, null=True)

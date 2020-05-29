@@ -15,12 +15,30 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
+class ReferencetypeSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Referencetype
+        fields = ['url', 'idreferencetype', 'namererefencetype']
+
+
+class ReferenceSerializer(serializers.HyperlinkedModelSerializer):
+    referencetypes = ReferencetypeSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Reference
+        fields = ['url', 'idreference', "namereference", 'sourceconcept',
+                  'targetconcept', 'fk_referencetype', "referencetypes"]
+
+
 class ConceptSerializer(serializers.HyperlinkedModelSerializer):
+    sourceconcept = ReferenceSerializer(many=True, read_only=True)
+    targetconcept = ReferenceSerializer(many=True, read_only=True)
 
     class Meta:
         model = Concept
         fields = ['url', 'idconcept', 'nameconcept', 'fk_idknowledgedomain',
-                  'fk_idmodule']
+                  'fk_idmodule', 'sourceconcept', 'targetconcept']
 
 
 class SubModuleSerializer(serializers.HyperlinkedModelSerializer):
@@ -49,22 +67,3 @@ class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
         model = Knowledgedomain
         fields = ['url', 'idknowledgedomain', 'nameknowledgedomain',
                   'subtitle', 'lastversion', 'author', 'modules']
-
-class ReferencetypeSerializer(serializers.HyperlinkedModelSerializer):
-
-    class Meta:
-        model = Referencetype
-        fields = ['url', 'idreferencetype', 'namererefencetype']
-
-
-class ReferenceSerializer(serializers.HyperlinkedModelSerializer):
-    sourceconcepts  = ConceptSerializer(many=True, read_only=True);
-    targetconcepts = ConceptSerializer(many=True, read_only=True);
-    referencetypes   = ReferencetypeSerializer(many=True, read_only=True);
-
-    class Meta:
-        model = Reference
-        fields = ['url', 'idreference',"namereference", 'sourceconcepts',
-                  'targetconcepts', 'fk_referencetype',"referencetypes"]
-
-
