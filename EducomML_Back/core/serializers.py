@@ -15,6 +15,22 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
+class MediatypeSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Mediatype
+        fields = ['url', 'idmediatype', 'namemediatype']
+
+
+class MobilemediaSerializer(serializers.HyperlinkedModelSerializer):
+    mediatypes = MediatypeSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Mobilemedia
+        fields = ['url', 'idmobilemedia', 'label', 'fk_informationitem', 'fk_idmediatype', 'fk_idknowledgedomain', 'fk_module', 'fk_idinstructionalelement', 'fk_idconcept',
+                  'difficultyLevel', 'learningStyle', 'path', 'namefile', 'resolution', 'description', 'time', 'textfull', 'textshort', 'urllink', 'mediatypes']
+
+
 class ReferencetypeSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:

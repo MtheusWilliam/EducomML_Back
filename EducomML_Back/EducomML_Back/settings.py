@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'EducomML_Back.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bd_educomml2',
+        'NAME': 'bd_educomml',
         'USER': 'postgres',
         'PASSWORD': '8729mM.@',
         'HOST': 'localhost',

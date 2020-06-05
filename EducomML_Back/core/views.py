@@ -66,3 +66,21 @@ class ReferencetypeViewSet(viewsets.ModelViewSet):
     queryset = Referencetype.objects.all()
     serializer_class = ReferencetypeSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class MobilemediaViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Mobilemedia.objects.all()
+    serializer_class = MobilemediaSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class MediatypeViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Mediatype.objects.all()
+    serializer_class = MediatypeSerializer
+    permission_classes = [permissions.IsAuthenticated]

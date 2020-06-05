@@ -12,6 +12,8 @@ router.register('module', views.ModuleViewSet)
 router.register('concept', views.ConceptViewSet)
 router.register('reference', views.ReferenceViewSet)
 router.register('referencetype', views.ReferencetypeViewSet)
+router.register('mobilemedia', views.MobilemediaViewSet)
+router.register('mediatype', views.MediatypeViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

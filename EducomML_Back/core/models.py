@@ -130,44 +130,14 @@ class Knowledgedomain(models.Model):
 
 
 class Mediatype(models.Model):
+    idmediatype = models.AutoField(db_column='idMediaType', primary_key=True)
     # Field name made lowercase.
-    idmediatype = models.IntegerField(
-        db_column='idMediaType', primary_key=True)
-    # Field name made lowercase.
-    namemedia = models.CharField(db_column='nameMedia', max_length=256)
+    namemediatype = models.CharField(
+        db_column='nameMediaType', max_length=256, blank=True, null=False)
 
     class Meta:
         managed = False
         db_table = 'MediaType'
-
-
-class Mobilemedia(models.Model):
-    # Field name made lowercase.
-    idmobilemedia = models.BigIntegerField(
-        db_column='idMobileMedia', primary_key=True)
-    description = models.TextField()
-    label = models.CharField(max_length=256, blank=True, null=True)
-    # Field name made lowercase.
-    fk_informationitem = models.BigIntegerField(
-        db_column='fk_Informationitem', blank=True, null=True)
-    # Field name made lowercase.
-    fk_idmediatype = models.IntegerField(
-        db_column='fk_idMediaType', blank=True, null=True)
-    # Field name made lowercase.
-    fk_idknowledgedomain = models.BigIntegerField(
-        db_column='fk_idKnowledgeDomain', blank=True, null=True)
-    # Field name made lowercase.
-    fk_module = models.ForeignKey(
-        'Module', models.DO_NOTHING, db_column='fk_Module', blank=True, null=True)
-    fk_idinstructionalelement = models.BigIntegerField(
-        db_column='fk_idInstructionalElement', blank=True, null=True)  # Field name made lowercase.
-    # Field name made lowercase.
-    fk_idconcept = models.BigIntegerField(
-        db_column='fk_idConcept', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'MobileMedia'
 
 
 class Module(models.Model):
@@ -190,6 +160,64 @@ class Module(models.Model):
         managed = False
         db_table = 'Module'
         ordering = ['idmodule']
+
+
+class Mobilemedia(models.Model):
+    # Field name made lowercase.
+    idmobilemedia = models.AutoField(
+        db_column='idMobileMedia', primary_key=True)
+    label = models.CharField(
+        db_column='label', max_length=256, blank=True, null=True)
+    # Field name made lowercase.
+    fk_informationitem = models.ForeignKey(
+        'Informationitem', db_column='fk_Informationitem',  blank=True, null=True,  on_delete=models.CASCADE, related_name='mobilemedias')
+    # Field name made lowercase.
+    fk_idmediatype = models.ForeignKey(
+        'Mediatype', models.DO_NOTHING, db_column='fk_idMediaType',  blank=True, null=False, related_name='mediatype')
+    fk_idknowledgedomain = models.ForeignKey(
+        'Knowledgedomain', db_column='fk_idKnowledgeDomain',  blank=True, null=True,  on_delete=models.CASCADE, related_name='mobilemedias')
+    # Field name made lowercase.
+    fk_module = models.ForeignKey(
+        'Module', db_column='fk_Module',  blank=True, null=True,  on_delete=models.CASCADE, related_name='mobilemedias')
+    # Field name made lowercase.
+    fk_idinstructionalelement = models.ForeignKey(
+        'Instructionalelement', db_column='fk_idInstructionalElement',  blank=True, null=True, on_delete=models.CASCADE, related_name='mobilemedias')
+    # Field name made lowercase.
+    fk_idconcept = models.ForeignKey(
+        'Concept', db_column='fk_idConcept',  blank=True, null=True,  on_delete=models.CASCADE, related_name='mobilemedias')
+    difficultyLevel = models.IntegerField(
+        db_column='difficultyLevel', blank=True, null=True)
+    learningStyle = models.IntegerField(
+        db_column='learningStyle', blank=True, null=True)
+    # Field name made lowercase.
+    path = models.CharField(
+        db_column='path', max_length=256, blank=True, null=True)
+    # Field name made lowercase.
+    namefile = models.CharField(
+        db_column='nameFile', max_length=256, blank=True, null=True)
+    # Field name made lowercase.
+    resolution = models.CharField(
+        db_column='resolution', max_length=256, blank=True, null=True)
+    # Field name made lowercase.
+    description = models.TextField(
+        db_column='description', blank=True, null=True)
+    # Field name made lowercase.
+    time = models.IntegerField(
+        db_column='time', blank=True, null=True)
+    # Field name made lowercase.
+    textfull = models.TextField(
+        db_column='textFull', blank=True, null=True)
+    # Field name made lowercase.
+    textshort = models.TextField(
+        db_column='textShort', blank=True, null=True)
+    # Field name made lowercase.
+    urllink = models.CharField(
+        db_column='url', max_length=256, blank=True, null=True)
+    visible = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'MobileMedia'
 
 
 class Phaseprocedure(models.Model):
@@ -240,7 +268,7 @@ class Reference(models.Model):
         Concept, db_column='targetConcept', related_name='targetconcept', on_delete=models.CASCADE)
     # Field name made lowercase.
     fk_referencetype = models.ForeignKey(
-        'Referencetype', models.DO_NOTHING, db_column='fk_ReferenceType', blank=True, null=True, related_name='referencetype')
+        'Referencetype', models.DO_NOTHING, db_column='fk_ReferenceType', blank=True, null=False, related_name='referencetype')
     # Field name made lowercase.
     namereference = models.CharField(
         db_column='nameReference', max_length=256, blank=True, null=True)
