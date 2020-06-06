@@ -15,6 +15,22 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
+class InformationitemtypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Informationitemtype
+        fields = ['url', 'idinformationitemtype', 'nameinformationitemtype']
+
+
+class InformationitemSerializer(serializers.HyperlinkedModelSerializer):
+    informationitemtypes = InformationitemtypeSerializer(
+        many=True, read_only=True)
+
+    class Meta:
+        model = Informationitem
+        fields = ['url', 'idinformationitem', 'nameinformationitem',
+                  'fk_informationitemtype', 'fk_idconcept', "informationitemtypes"]
+
+
 class MediatypeSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:

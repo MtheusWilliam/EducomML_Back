@@ -46,14 +46,14 @@ class Concept(models.Model):
 
 class Informationitem(models.Model):
     # Field name made lowercase.
-    idinformationitem = models.BigIntegerField(
+    idinformationitem = models.AutoField(
         db_column='idInformationItem', primary_key=True)
     # Field name made lowercase.
     nameinformationitem = models.CharField(
         db_column='nameInformationItem', max_length=256, blank=True, null=True)
     # Field name made lowercase.
     fk_informationitemtype = models.ForeignKey(
-        'Informationitemtype', models.DO_NOTHING, db_column='fk_InformationItemType', blank=True, null=True)
+        'Informationitemtype', models.DO_NOTHING, db_column='fk_InformationItemType', blank=True, null=True, related_name='informationitemtypes')
     # Field name made lowercase.
     fk_idconcept = models.ForeignKey(
         Concept, models.DO_NOTHING, db_column='fk_idConcept', blank=True, null=True)
@@ -65,11 +65,11 @@ class Informationitem(models.Model):
 
 class Informationitemtype(models.Model):
     # Field name made lowercase.
-    idinformationitemtype = models.IntegerField(
+    idinformationitemtype = models.AutoField(
         db_column='idInformationItemType', primary_key=True)
     # Field name made lowercase.
-    nameinformationitem = models.CharField(
-        db_column='nameInformationItem', max_length=256)
+    nameinformationitemtype = models.CharField(
+        db_column='nameInformationItemType', max_length=256)
 
     class Meta:
         managed = False
@@ -218,6 +218,7 @@ class Mobilemedia(models.Model):
     class Meta:
         managed = False
         db_table = 'MobileMedia'
+        ordering = ['idmobilemedia']
 
 
 class Phaseprocedure(models.Model):

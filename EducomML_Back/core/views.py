@@ -84,3 +84,21 @@ class MediatypeViewSet(viewsets.ModelViewSet):
     queryset = Mediatype.objects.all()
     serializer_class = MediatypeSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class InformationitemViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Informationitem.objects.all()
+    serializer_class = InformationitemSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class InformationitemtypeViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Informationitemtype.objects.all()
+    serializer_class = InformationitemtypeSerializer
+    permission_classes = [permissions.IsAuthenticated]
