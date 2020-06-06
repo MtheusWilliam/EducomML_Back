@@ -50,36 +50,40 @@ class ReferenceSerializer(serializers.HyperlinkedModelSerializer):
 class ConceptSerializer(serializers.HyperlinkedModelSerializer):
     sourceconcept = ReferenceSerializer(many=True, read_only=True)
     targetconcept = ReferenceSerializer(many=True, read_only=True)
+    mobilemedias = MobilemediaSerializer(many=True, read_only=True)
 
     class Meta:
         model = Concept
         fields = ['url', 'idconcept', 'nameconcept', 'fk_idknowledgedomain',
-                  'fk_idmodule', 'sourceconcept', 'targetconcept']
+                  'fk_idmodule', 'sourceconcept', 'targetconcept', 'mobilemedias']
 
 
 class SubModuleSerializer(serializers.HyperlinkedModelSerializer):
     concepts = ConceptSerializer(many=True, read_only=True)
+    mobilemedias = MobilemediaSerializer(many=True, read_only=True)
 
     class Meta:
         model = Module
         fields = ['url', 'idmodule', 'fk_idmodule', 'namemodule', 'subtitle',
-                  'idknowledgedomain', 'concepts']
+                  'idknowledgedomain', 'concepts', 'mobilemedias']
 
 
 class ModuleSerializer(serializers.HyperlinkedModelSerializer):
     submodules = SubModuleSerializer(many=True, read_only=True)
     concepts = ConceptSerializer(many=True, read_only=True)
+    mobilemedias = MobilemediaSerializer(many=True, read_only=True)
 
     class Meta:
         model = Module
         fields = ['url', 'idmodule', 'fk_idmodule', 'namemodule', 'subtitle',
-                  'idknowledgedomain', 'submodules', 'concepts']
+                  'idknowledgedomain', 'submodules', 'concepts', 'mobilemedias']
 
 
 class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
     modules = ModuleSerializer(many=True, read_only=True)
+    mobilemedias = MobilemediaSerializer(many=True, read_only=True)
 
     class Meta:
         model = Knowledgedomain
         fields = ['url', 'idknowledgedomain', 'nameknowledgedomain',
-                  'subtitle', 'lastversion', 'author', 'modules']
+                  'subtitle', 'lastversion', 'author', 'modules', 'mobilemedias']
