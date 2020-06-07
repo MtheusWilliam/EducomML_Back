@@ -102,3 +102,12 @@ class InformationitemtypeViewSet(viewsets.ModelViewSet):
     queryset = Informationitemtype.objects.all()
     serializer_class = InformationitemtypeSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class PhaseprocedureViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Phaseprocedure.objects.all()
+    serializer_class = PhaseprocedureSerializer
+    permission_classes = [permissions.IsAuthenticated]

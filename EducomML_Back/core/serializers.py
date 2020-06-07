@@ -15,10 +15,22 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
+class PhaseprocedureSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Phaseprocedure
+        fields = ['url', 'idphaseprocedure', 'order',
+                  'description', 'fk_informationitem']
+
+
 class InformationitemtypeSerializer(serializers.HyperlinkedModelSerializer):
+    phaseprocedures = PhaseprocedureSerializer(
+        many=True, read_only=True
+    )
+
     class Meta:
         model = Informationitemtype
-        fields = ['url', 'idinformationitemtype', 'nameinformationitemtype']
+        fields = ['url', 'idinformationitemtype',
+                  'nameinformationitemtype', 'phaseprocedures']
 
 
 class InformationitemSerializer(serializers.HyperlinkedModelSerializer):
