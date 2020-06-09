@@ -52,11 +52,14 @@ class Informationitem(models.Model):
     nameinformationitem = models.CharField(
         db_column='nameInformationItem', max_length=256, blank=True, null=True)
     # Field name made lowercase.
+    descriptioninformationitem = models.TextField(
+        db_column='descriptionInformationItem', blank=True, null=True)
+    # Field name made lowercase.
     fk_informationitemtype = models.ForeignKey(
         'Informationitemtype', models.DO_NOTHING, db_column='fk_InformationItemType', blank=False, null=False, related_name='informationitemtypes')
     # Field name made lowercase.
     fk_idconcept = models.ForeignKey(
-        Concept, db_column='fk_idConcept', blank=False, null=False, on_delete=models.CASCADE)
+        Concept, db_column='fk_idConcept', blank=False, null=False, on_delete=models.CASCADE, related_name='informationitems')
 
     class Meta:
         managed = False

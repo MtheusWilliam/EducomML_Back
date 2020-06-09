@@ -23,24 +23,24 @@ class PhaseprocedureSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class InformationitemtypeSerializer(serializers.HyperlinkedModelSerializer):
-    phaseprocedures = PhaseprocedureSerializer(
-        many=True, read_only=True
-    )
 
     class Meta:
         model = Informationitemtype
         fields = ['url', 'idinformationitemtype',
-                  'nameinformationitemtype', 'phaseprocedures']
+                  'nameinformationitemtype']
 
 
 class InformationitemSerializer(serializers.HyperlinkedModelSerializer):
     informationitemtypes = InformationitemtypeSerializer(
         many=True, read_only=True)
+    phaseprocedures = PhaseprocedureSerializer(
+        many=True, read_only=True
+    )
 
     class Meta:
         model = Informationitem
-        fields = ['url', 'idinformationitem', 'nameinformationitem',
-                  'fk_informationitemtype', 'fk_idconcept', "informationitemtypes"]
+        fields = ['url', 'idinformationitem', 'nameinformationitem',  'descriptioninformationitem',
+                  'fk_informationitemtype', 'fk_idconcept', "informationitemtypes", 'phaseprocedures']
 
 
 class MediatypeSerializer(serializers.HyperlinkedModelSerializer):
@@ -79,11 +79,12 @@ class ConceptSerializer(serializers.HyperlinkedModelSerializer):
     sourceconcept = ReferenceSerializer(many=True, read_only=True)
     targetconcept = ReferenceSerializer(many=True, read_only=True)
     mobilemedias = MobilemediaSerializer(many=True, read_only=True)
+    informationitems = InformationitemSerializer(many=True, read_only=True)
 
     class Meta:
         model = Concept
         fields = ['url', 'idconcept', 'nameconcept', 'fk_idknowledgedomain',
-                  'fk_idmodule', 'sourceconcept', 'targetconcept', 'mobilemedias']
+                  'fk_idmodule', 'sourceconcept', 'targetconcept', 'mobilemedias', 'informationitems']
 
 
 class SubModuleSerializer(serializers.HyperlinkedModelSerializer):
