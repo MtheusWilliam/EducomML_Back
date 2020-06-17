@@ -15,6 +15,75 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
+class AnswersalternativesSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Answersalternatives
+        fields = ['url', 'idanswersalternatives', 'idobjanswer',
+                  'answers', 'istrue', 'fk_idquestion']
+
+
+class ResolutionquestionSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Resolutionquestion
+        fields = ['url', 'idresolutionquestion', 'correctitem',
+                  'correctanswer', 'fk_idquestion']
+
+
+class QuestiontypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Questiontype
+        fields = ['url', 'idquestiontype', 'namequestiontype']
+
+
+class MediatypeSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Mediatype
+        fields = ['url', 'idmediatype', 'namemediatype']
+
+
+class MobilemediaSerializer(serializers.HyperlinkedModelSerializer):
+    mediatypes = MediatypeSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Mobilemedia
+        fields = ['url', 'idmobilemedia', 'label', 'fk_informationitem', 'fk_idmediatype', 'fk_idknowledgedomain', 'fk_module', 'fk_idinstructionalelement', 'fk_idconcept', 'fk_idquestion',
+                  'difficultyLevel', 'learningStyle', 'path', 'namefile', 'resolution', 'description', 'time', 'textfull', 'textshort', 'urllink', 'mediatypes']
+
+
+class QuestionSerializer(serializers.HyperlinkedModelSerializer):
+    resolutionquestion = ResolutionquestionSerializer(
+        many=True, read_only=True)
+    answersalternatives = AnswersalternativesSerializer(
+        many=True, read_only=True)
+    mobilemedias = MobilemediaSerializer(
+        many=True, read_only=True)
+
+    class Meta:
+        model = Question
+        fields = ['url', 'idquestion', 'orderquestion',
+                  'typequestion', 'fk_idinstructionalelement', 'resolutionquestion', 'answersalternatives', 'mobilemedias']
+
+
+class InstrucelementtypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Instrucelementtype
+        fields = ['url', 'idinstrucelementtype', 'nameinstrucelementtype',
+                  'idcategory']
+
+
+class InstructionalelementSerializer(serializers.HyperlinkedModelSerializer):
+    questions = QuestionSerializer(
+        many=True, read_only=True)
+    mobilemedias = MobilemediaSerializer(
+        many=True, read_only=True)
+
+    class Meta:
+        model = Instructionalelement
+        fields = ['url', 'idinstructionalelement', 'label', 'fk_instructionalelementtype', 'fk_idknowledgedomain',
+                  'fk_idmodule', 'fk_idconcept', 'fk_informationitem', 'memberamount', 'description', 'questions', 'mobilemedias']
+
+
 class PhaseprocedureSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Phaseprocedure
@@ -41,22 +110,6 @@ class InformationitemSerializer(serializers.HyperlinkedModelSerializer):
         model = Informationitem
         fields = ['url', 'idinformationitem', 'nameinformationitem',  'descriptioninformationitem',
                   'fk_informationitemtype', 'fk_idconcept', "informationitemtypes", 'phaseprocedures']
-
-
-class MediatypeSerializer(serializers.HyperlinkedModelSerializer):
-
-    class Meta:
-        model = Mediatype
-        fields = ['url', 'idmediatype', 'namemediatype']
-
-
-class MobilemediaSerializer(serializers.HyperlinkedModelSerializer):
-    mediatypes = MediatypeSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Mobilemedia
-        fields = ['url', 'idmobilemedia', 'label', 'fk_informationitem', 'fk_idmediatype', 'fk_idknowledgedomain', 'fk_module', 'fk_idinstructionalelement', 'fk_idconcept',
-                  'difficultyLevel', 'learningStyle', 'path', 'namefile', 'resolution', 'description', 'time', 'textfull', 'textshort', 'urllink', 'mediatypes']
 
 
 class ReferencetypeSerializer(serializers.HyperlinkedModelSerializer):

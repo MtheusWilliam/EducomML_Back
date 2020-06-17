@@ -4,17 +4,18 @@ from django.db import models
 
 class Answersalternatives(models.Model):
     # Field name made lowercase.
-    idanswersalternatives = models.BigIntegerField(
+    idanswersalternatives = models.AutoField(
         db_column='idAnswersAlternatives', primary_key=True)
     # Field name made lowercase.
     idobjanswer = models.CharField(
         db_column='idObjAnswer', max_length=256, blank=True, null=True)
-    answers = models.CharField(max_length=256, blank=True, null=True)
+    answers = models.CharField(
+        db_column='answers', max_length=256, blank=False, null=False)
     # Field name made lowercase.
-    istrue = models.BooleanField(db_column='isTrue', blank=True, null=True)
+    istrue = models.BooleanField(db_column='isTrue', blank=False, null=False)
     # Field name made lowercase.
     fk_idquestion = models.ForeignKey(
-        'Question', models.DO_NOTHING, db_column='fk_idQuestion')
+        'Question', blank=False, null=False, db_column='fk_idQuestion', on_delete=models.CASCADE, related_name="answersalternatives")
 
     class Meta:
         managed = False
@@ -64,6 +65,7 @@ class Informationitem(models.Model):
     class Meta:
         managed = False
         db_table = 'InformationItem'
+        ordering = ['idinformationitem']
 
 
 class Informationitemtype(models.Model):
@@ -79,23 +81,9 @@ class Informationitemtype(models.Model):
         db_table = 'InformationItemType'
 
 
-class Instructionalelement(models.Model):
-    idinstructionalelement = models.BigIntegerField(
-        db_column='idInstructionalElement', primary_key=True)  # Field name made lowercase.
-    # This field type is a guess.
-    label = models.TextField(blank=True, null=True)
-    visible = models.BooleanField(blank=True, null=True)
-    fk_instructionalelementtype = models.ForeignKey(
-        Informationitemtype, models.DO_NOTHING, db_column='fk_InstructionalElementType', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'InstructionalElement'
-
-
-class Instructionalelementtype(models.Model):
+class Instrucelementtype(models.Model):
     # Field name made lowercase.
-    idinstrucelementtype = models.BigIntegerField(
+    idinstrucelementtype = models.AutoField(
         db_column='idInstrucElementType', primary_key=True)
     # Field name made lowercase.
     nameinstrucelementtype = models.CharField(
@@ -106,7 +94,34 @@ class Instructionalelementtype(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'InstructionalElementType'
+        db_table = 'InstrucElementType'
+
+
+class Instructionalelement(models.Model):
+    idinstructionalelement = models.AutoField(
+        db_column='idInstructionalElement', primary_key=True)  # Field name made lowercase.
+    # This field type is a guess.
+    label = models.CharField(
+        db_column='label', max_length=256, blank=False, null=False)
+    visible = models.BooleanField(blank=True, null=True)
+    fk_instructionalelementtype = models.ForeignKey(
+        'Instrucelementtype', models.DO_NOTHING, db_column='fk_InstructionalElementType', blank=True, null=True)  # Field name made lowercase.
+    fk_idknowledgedomain = models.ForeignKey(
+        'Knowledgedomain', db_column='fk_idKnowledgeDomain', blank=True, null=True, on_delete=models.CASCADE, related_name='instructionalelements')  # Field name made lowercase.
+    fk_idmodule = models.ForeignKey(
+        'Module', db_column='fk_idModule', blank=True, null=True, on_delete=models.CASCADE, related_name='instructionalelements')  # Field name made lowercase.
+    fk_idconcept = models.ForeignKey(
+        'Concept', db_column='fk_idConcept', blank=True, null=True, on_delete=models.CASCADE, related_name='instructionalelements')  # Field name made lowercase.
+    fk_informationitem = models.ForeignKey(
+        'Informationitem', db_column='fk_idInformationItem', blank=True, null=True, on_delete=models.CASCADE, related_name='instructionalelements')  # Field name made lowercase.
+    memberamount = models.BigIntegerField(
+        db_column='memberAmount', blank=True, null=True)
+    description = models.TextField(
+        db_column='description', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'InstructionalElement'
 
 
 class Knowledgedomain(models.Model):
@@ -188,6 +203,8 @@ class Mobilemedia(models.Model):
     # Field name made lowercase.
     fk_idconcept = models.ForeignKey(
         'Concept', db_column='fk_idConcept',  blank=True, null=True, related_name='mobilemedias', on_delete=models.CASCADE)
+    fk_idquestion = models.ForeignKey(
+        'Question', db_column='fk_idQuestion', blank=True, null=True, on_delete=models.CASCADE, related_name='mobilemedias')
     difficultyLevel = models.IntegerField(
         db_column='difficultyLevel', blank=True, null=True)
     learningStyle = models.IntegerField(
@@ -205,8 +222,8 @@ class Mobilemedia(models.Model):
     description = models.TextField(
         db_column='description', blank=True, null=True)
     # Field name made lowercase.
-    time = models.IntegerField(
-        db_column='time', blank=True, null=True)
+    time = models.CharField(
+        db_column='time', max_length=256, blank=True, null=True)
     # Field name made lowercase.
     textfull = models.TextField(
         db_column='textFull', blank=True, null=True)
@@ -237,27 +254,59 @@ class Phaseprocedure(models.Model):
     class Meta:
         managed = False
         db_table = 'PhaseProcedure'
+        ordering = ['order']
 
 
 class Question(models.Model):
     # Field name made lowercase.
-    idquestion = models.BigIntegerField(
+    idquestion = models.AutoField(
         db_column='idQuestion', primary_key=True)
     # Field name made lowercase.
     orderquestion = models.CharField(
         db_column='orderQuestion', max_length=256, blank=True, null=True)
     # Field name made lowercase.
-    typequestion = models.IntegerField(
-        db_column='typeQuestion', blank=True, null=True)
+    typequestion = models.ForeignKey(
+        'QuestionType', models.DO_NOTHING, db_column='typeQuestion', blank=False, null=False)
     # Field name made lowercase.
-    fk_idmobilemedia = models.ForeignKey(
-        Mobilemedia, models.DO_NOTHING, db_column='fk_idMobileMedia', blank=True, null=True)
-    fk_idinstructionalelement = models.BigIntegerField(
-        db_column='fk_idInstructionalElement', blank=True, null=True)  # Field name made lowercase.
+    fk_idinstructionalelement = models.ForeignKey(
+        'InstructionalElement', db_column='fk_idInstructionalElement', blank=True, null=True, on_delete=models.CASCADE, related_name='questions')  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'Question'
+        ordering = ['orderquestion']
+
+
+class Questiontype(models.Model):
+    # Field name made lowercase.
+    idquestiontype = models.AutoField(
+        db_column='idQuestionType', primary_key=True)
+    # Field name made lowercase.
+    namequestiontype = models.CharField(
+        db_column='nameQuestionType', max_length=256, blank=False, null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'QuestionType'
+
+
+class Resolutionquestion(models.Model):
+    # Field name made lowercase.
+    idresolutionquestion = models.AutoField(
+        db_column='idResolutionQuestion', primary_key=True)
+    # Field name made lowercase.
+    correctitem = models.TextField(
+        db_column='correctItem', blank=True, null=True)
+    # Field name made lowercase.
+    correctanswer = models.TextField(
+        db_column='correctAnswer', blank=True, null=True)
+    # Field name made lowercase.
+    fk_idquestion = models.ForeignKey(
+        'Question', db_column='fk_idQuestion', blank=True, null=True, on_delete=models.CASCADE, related_name='resolutionquestion')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'ResolutionQuestion'
 
 
 class Reference(models.Model):

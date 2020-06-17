@@ -18,6 +18,13 @@ router.register('informationitem', views.InformationitemViewSet)
 router.register('informationitemtype', views.InformationitemtypeViewSet)
 router.register('phaseprocedure', views.PhaseprocedureViewSet)
 
+router.register('instructionalelement', views.InstructionalelementViewSet)
+router.register('instrucelementtype', views.InstrucelementtypeViewSet)
+router.register('question', views.QuestionViewSet)
+router.register('questiontype', views.QuestiontypeViewSet)
+router.register('resolutionquestion', views.ResolutionquestionViewSet)
+router.register('answersalternatives', views.AnswersalternativesViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),

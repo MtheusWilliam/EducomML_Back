@@ -111,3 +111,57 @@ class PhaseprocedureViewSet(viewsets.ModelViewSet):
     queryset = Phaseprocedure.objects.all()
     serializer_class = PhaseprocedureSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class InstructionalelementViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Instructionalelement.objects.all()
+    serializer_class = InstructionalelementSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class InstrucelementtypeViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Instrucelementtype.objects.all()
+    serializer_class = InstrucelementtypeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class QuestiontypeViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Questiontype.objects.all()
+    serializer_class = QuestiontypeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ResolutionquestionViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Resolutionquestion.objects.all()
+    serializer_class = ResolutionquestionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class AnswersalternativesViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    queryset = Answersalternatives.objects.all()
+    serializer_class = AnswersalternativesSerializer
+    permission_classes = [permissions.IsAuthenticated]
