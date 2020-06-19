@@ -16,10 +16,13 @@ class Answersalternatives(models.Model):
     # Field name made lowercase.
     fk_idquestion = models.ForeignKey(
         'Question', blank=False, null=False, db_column='fk_idQuestion', on_delete=models.CASCADE, related_name="answersalternatives")
+    orderansweralternatives = models.BigIntegerField(
+        db_column='orderAnswerAlternatives', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'AnswersAlternatives'
+        ordering = ['orderansweralternatives']
 
 
 class Concept(models.Model):
@@ -60,7 +63,7 @@ class Informationitem(models.Model):
         'Informationitemtype', models.DO_NOTHING, db_column='fk_InformationItemType', blank=False, null=False, related_name='informationitemtypes')
     # Field name made lowercase.
     fk_idconcept = models.ForeignKey(
-        Concept, db_column='fk_idConcept', blank=False, null=False, on_delete=models.CASCADE, related_name='informationitems')
+        'Concept', db_column='fk_idConcept', blank=False, null=False, on_delete=models.CASCADE, related_name='informationitems')
 
     class Meta:
         managed = False
@@ -261,6 +264,10 @@ class Question(models.Model):
     # Field name made lowercase.
     idquestion = models.AutoField(
         db_column='idQuestion', primary_key=True)
+    # Field name made lowercase.
+    descriptionquestion = models.TextField(
+        db_column='descriptionQuestion', blank=False, null=False
+    )
     # Field name made lowercase.
     orderquestion = models.CharField(
         db_column='orderQuestion', max_length=256, blank=True, null=True)
