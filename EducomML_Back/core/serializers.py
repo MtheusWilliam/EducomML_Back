@@ -48,7 +48,7 @@ class MobilemediaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Mobilemedia
         fields = ['url', 'idmobilemedia', 'label', 'fk_informationitem', 'fk_idmediatype', 'fk_idknowledgedomain', 'fk_module', 'fk_idinstructionalelement', 'fk_idconcept', 'fk_idquestion',
-                  'difficultyLevel', 'learningStyle', 'path', 'namefile', 'resolution', 'description', 'time', 'textfull', 'textshort', 'urllink', 'mediatypes']
+                  'difficultyLevel', 'learningStyle', 'visible', 'path', 'namefile', 'resolution', 'description', 'time', 'textfull', 'textshort', 'urllink', 'mediatypes']
 
 
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
@@ -81,7 +81,7 @@ class InstructionalelementSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Instructionalelement
         fields = ['url', 'idinstructionalelement', 'label', 'fk_instructionalelementtype', 'fk_idknowledgedomain',
-                  'fk_idmodule', 'fk_idconcept', 'fk_informationitem', 'memberamount', 'description', 'questions', 'mobilemedias']
+                  'fk_idmodule', 'fk_idconcept', 'fk_informationitem', 'memberamount', 'description', 'visible', 'questions', 'mobilemedias']
 
 
 class PhaseprocedureSerializer(serializers.HyperlinkedModelSerializer):
@@ -109,7 +109,7 @@ class InformationitemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Informationitem
         fields = ['url', 'idinformationitem', 'nameinformationitem',  'descriptioninformationitem',
-                  'fk_informationitemtype', 'fk_idconcept', "informationitemtypes", 'phaseprocedures']
+                  'fk_informationitemtype', 'fk_idconcept', 'visible', "informationitemtypes", 'phaseprocedures']
 
 
 class ReferencetypeSerializer(serializers.HyperlinkedModelSerializer):
@@ -139,7 +139,7 @@ class ConceptSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Concept
         fields = ['url', 'idconcept', 'nameconcept', 'fk_idknowledgedomain',
-                  'fk_idmodule', 'sourceconcept', 'targetconcept', 'mobilemedias', 'informationitems', 'instructionalelements']
+                  'fk_idmodule', 'visible', 'sourceconcept', 'targetconcept', 'mobilemedias', 'informationitems', 'instructionalelements']
 
 
 class SubModuleSerializer(serializers.HyperlinkedModelSerializer):
@@ -151,7 +151,7 @@ class SubModuleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Module
         fields = ['url', 'idmodule', 'fk_idmodule', 'namemodule', 'subtitle',
-                  'idknowledgedomain', 'concepts', 'mobilemedias', 'instructionalelements']
+                  'idknowledgedomain', 'visible', 'concepts', 'mobilemedias', 'instructionalelements']
 
 
 class ModuleSerializer(serializers.HyperlinkedModelSerializer):
@@ -164,7 +164,7 @@ class ModuleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Module
         fields = ['url', 'idmodule', 'fk_idmodule', 'namemodule', 'subtitle',
-                  'idknowledgedomain', 'submodules', 'concepts', 'mobilemedias', 'instructionalelements']
+                  'idknowledgedomain', 'visible', 'submodules', 'concepts', 'mobilemedias', 'instructionalelements']
 
 
 class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):

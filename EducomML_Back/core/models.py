@@ -40,7 +40,8 @@ class Concept(models.Model):
     # Field name made lowercase.
     fk_idmodule = models.ForeignKey(
         'Module', db_column='fk_idModule', related_name='concepts', on_delete=models.CASCADE)
-    visible = models.BooleanField(blank=True, null=True)
+    visible = models.BooleanField(
+        db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -64,6 +65,8 @@ class Informationitem(models.Model):
     # Field name made lowercase.
     fk_idconcept = models.ForeignKey(
         'Concept', db_column='fk_idConcept', blank=False, null=False, on_delete=models.CASCADE, related_name='informationitems')
+    visible = models.BooleanField(
+        db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -106,7 +109,6 @@ class Instructionalelement(models.Model):
     # This field type is a guess.
     label = models.CharField(
         db_column='label', max_length=256, blank=False, null=False)
-    visible = models.BooleanField(blank=True, null=True)
     fk_instructionalelementtype = models.ForeignKey(
         'Instrucelementtype', models.DO_NOTHING, db_column='fk_InstructionalElementType', blank=True, null=True)  # Field name made lowercase.
     fk_idknowledgedomain = models.ForeignKey(
@@ -121,10 +123,13 @@ class Instructionalelement(models.Model):
         db_column='memberAmount', blank=True, null=True)
     description = models.TextField(
         db_column='description', blank=True, null=True)
+    visible = models.BooleanField(
+        db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'InstructionalElement'
+        ordering = ['idinstructionalelement']
 
 
 class Knowledgedomain(models.Model):
@@ -148,6 +153,7 @@ class Knowledgedomain(models.Model):
     class Meta:
         managed = False
         db_table = 'KnowledgeDomain'
+        ordering = ['idknowledgedomain']
 
 
 class Mediatype(models.Model):
@@ -175,7 +181,8 @@ class Module(models.Model):
     # Field name made lowercase.
     fk_idmodule = models.ForeignKey(
         'self', db_column='fk_IdModule', blank=True, null=True, related_name='submodules', on_delete=models.CASCADE)
-    visible = models.BooleanField(blank=True, null=True)
+    visible = models.BooleanField(
+        db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -236,7 +243,8 @@ class Mobilemedia(models.Model):
     # Field name made lowercase.
     urllink = models.CharField(
         db_column='url', max_length=256, blank=True, null=True)
-    visible = models.BooleanField(blank=True, null=True)
+    visible = models.BooleanField(
+        db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -269,8 +277,8 @@ class Question(models.Model):
         db_column='descriptionQuestion', blank=False, null=False
     )
     # Field name made lowercase.
-    orderquestion = models.CharField(
-        db_column='orderQuestion', max_length=256, blank=True, null=True)
+    orderquestion = models.IntegerField(
+        db_column='orderQuestion', blank=True, null=True)
     # Field name made lowercase.
     typequestion = models.ForeignKey(
         'QuestionType', models.DO_NOTHING, db_column='typeQuestion', blank=False, null=False)
