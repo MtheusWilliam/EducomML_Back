@@ -2,13 +2,14 @@ from django.contrib.auth.models import User, Group
 from .models import *
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from .serializers import *
-
 
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
+    authentication_class = [JSONWebTokenAuthentication]
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -20,6 +21,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    authentication_class = [JSONWebTokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -29,6 +31,7 @@ class KnowledgedomainViewSet(viewsets.ModelViewSet):
     """
     queryset = Knowledgedomain.objects.all()
     serializer_class = KnowledgedomainSerializer
+    authentication_class = [JSONWebTokenAuthentication]    
     permission_classes = [permissions.IsAuthenticated]
 
 
