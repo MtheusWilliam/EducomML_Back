@@ -1,5 +1,6 @@
 
 from django.db import models
+from django.contrib.auth.models import User, Group
 
 
 class Answersalternatives(models.Model):
@@ -148,7 +149,8 @@ class Knowledgedomain(models.Model):
     # Field name made lowercase.
     lastversion = models.CharField(
         db_column='lastVersion', max_length=45, blank=True, null=True)
-    author = models.CharField(max_length=45, blank=True, null=False)
+    fk_iduser = models.ForeignKey(
+        User, db_column='fk_idUser', blank=False, null=False, related_name='knowledgedomains', on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -357,4 +359,3 @@ class Referencetype(models.Model):
     class Meta:
         managed = False
         db_table = 'Referencetype'
-

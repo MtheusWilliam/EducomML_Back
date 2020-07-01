@@ -3,18 +3,6 @@ from rest_framework import serializers
 from .models import *
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'url', 'username', 'email', 'groups', 'password']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
-
-
 class AnswersalternativesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Answersalternatives
@@ -176,4 +164,19 @@ class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Knowledgedomain
         fields = ['url', 'idknowledgedomain', 'nameknowledgedomain',
-                  'subtitle', 'lastversion', 'author', 'modules', 'mobilemedias', 'instructionalelements']
+                  'subtitle', 'lastversion', 'fk_iduser', 'modules', 'mobilemedias', 'instructionalelements']
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    knowledgedomains = KnowledgedomainSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'url', 'username', 'email',
+                  'groups', 'password', 'knowledgedomains']
+
+
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['url', 'name']
