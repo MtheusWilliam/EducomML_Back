@@ -29,6 +29,7 @@ router.register('answersalternatives', views.AnswersalternativesViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    path('userId/', views.UserId),
     path('api-token-auth/', obtain_jwt_token),
     path('api-token-refresh/', refresh_jwt_token),
     path('api-token-verify/', verify_jwt_token),

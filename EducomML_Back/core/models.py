@@ -149,6 +149,8 @@ class Knowledgedomain(models.Model):
     # Field name made lowercase.
     lastversion = models.CharField(
         db_column='lastVersion', max_length=45, blank=True, null=True)
+    author = models.CharField(
+        db_column='author', max_length=45, blank=True, null=True)
     fk_iduser = models.ForeignKey(
         User, db_column='fk_idUser', blank=False, null=False, related_name='knowledgedomains', on_delete=models.CASCADE)
 

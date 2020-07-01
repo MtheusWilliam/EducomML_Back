@@ -163,17 +163,20 @@ class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Knowledgedomain
-        fields = ['url', 'idknowledgedomain', 'nameknowledgedomain',
+        fields = ['url', 'idknowledgedomain', 'nameknowledgedomain', 'author',
                   'subtitle', 'lastversion', 'fk_iduser', 'modules', 'mobilemedias', 'instructionalelements']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     knowledgedomains = KnowledgedomainSerializer(many=True, read_only=True)
 
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+
     class Meta:
         model = User
-        fields = ['id', 'url', 'username', 'email',
-                  'groups', 'password', 'knowledgedomains']
+        fields = ['id', 'url', 'username', 'email','first_name', 'last_name', 'password', 'knowledgedomains']
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):

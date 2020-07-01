@@ -1,10 +1,27 @@
 from django.contrib.auth.models import User, Group
+from django.contrib.auth import authenticate, get_user_model
 from .models import *
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.response import Response
 from rest_framework import authentication
+from rest_framework.decorators import api_view, authentication_classes
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from .serializers import *
+
+@api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+def UserId(request):
+    username = request.data.get('username')
+    User = get_user_model().objects.get(username=username)
+    response = Response()
+    id = User.id
+    name = User.first_name+" "+User.last_name 
+    response.data = {
+        'url': "http://localhost:8000/users/"+str(id)+"/",
+        'complete_name': name
+    }
+    return response
 
 
 class UserViewSet(viewsets.ModelViewSet):
