@@ -3,6 +3,26 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 
 
+class Assessmentparameter(models.Model):
+    # Field name made lowercase.
+    idassessmentparameter = models.AutoField(
+        db_column='idAssessmentParameter', primary_key=True)
+    # Field name made lowercase.
+    typethreshold = models.ForeignKey(
+        'Typethreshold', blank=False, null=False, db_column='typeThreshold', on_delete=models.CASCADE)
+    fk_idknowledgedomain = models.ForeignKey(
+        'Knowledgedomain', blank=False, null=False, db_column='fk_idKnowledgeDomain', on_delete=models.CASCADE, related_name="AssessmentParameter")
+    fk_idmodule = models.ForeignKey(
+        'Module', blank=False, null=False, db_column='fk_idModule', on_delete=models.CASCADE, related_name="AssessmentParameter")
+    fk_idconcept = models.ForeignKey(
+        'Concept', blank=False, null=False, db_column='fk_idConcept', on_delete=models.CASCADE, related_name="AssessmentParameter")
+
+    class Meta:
+        managed = False
+        db_table = 'AssessmentParameter'
+        ordering = ['idassessmentparameter']
+
+
 class Answersalternatives(models.Model):
     # Field name made lowercase.
     idanswersalternatives = models.AutoField(
@@ -149,8 +169,6 @@ class Knowledgedomain(models.Model):
     # Field name made lowercase.
     lastversion = models.CharField(
         db_column='lastVersion', max_length=45, blank=True, null=True)
-    author = models.CharField(
-        db_column='author', max_length=45, blank=True, null=True)
     fk_iduser = models.ForeignKey(
         User, db_column='fk_idUser', blank=False, null=False, related_name='knowledgedomains', on_delete=models.CASCADE)
 
@@ -309,6 +327,28 @@ class Questiontype(models.Model):
         db_table = 'QuestionType'
 
 
+class Range(models.Model):
+    # Field name made lowercase.
+    idrange = models.AutoField(
+        db_column='idRange', primary_key=True)
+    # Field name made lowercase.
+    namerange = models.CharField(
+        db_column='nameRange', max_length=256, blank=False, null=False)
+    # Field name made lowercase.
+    fk_idassessmentparameter = models.ForeignKey(
+        'Assessmentparameter', blank=False, null=False, db_column='fk_idAssessmentParameter', on_delete=models.CASCADE, related_name="Range")
+    # Field name made lowercase.
+    initialvalue = models.IntegerField(
+        db_column='initialValue', blank=False, null=False)
+    # Field name made lowercase.
+    limitvalue = models.IntegerField(
+        db_column='limitValue', blank=False, null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'Range'
+
+
 class Resolutionquestion(models.Model):
     # Field name made lowercase.
     idresolutionquestion = models.AutoField(
@@ -361,3 +401,45 @@ class Referencetype(models.Model):
     class Meta:
         managed = False
         db_table = 'Referencetype'
+
+
+class Single(models.Model):
+    # Field name made lowercase.
+    idsingle = models.AutoField(
+        db_column='idSingle', primary_key=True)
+    # Field name made lowercase.
+    fk_idassessmentparameter = models.ForeignKey(
+        'Assessmentparameter', blank=False, null=False, db_column='fk_idAssessmentParameter', on_delete=models.CASCADE, related_name="Single")
+    # Field name made lowercase.
+    threshold = models.CharField(
+        db_column='threshold', max_length=256, blank=False, null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'Single'
+
+
+class Scopo(models.Model):
+    # Field name made lowercase.
+    idscopo = models.AutoField(
+        db_column='idScopo', primary_key=True)
+    # Field name made lowercase.
+    typescopo = models.CharField(
+        db_column='typeScopo', max_length=256, blank=False, null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'Scopo'
+
+
+class Typethreshold(models.Model):
+    # Field name made lowercase.
+    idtypethreshold = models.AutoField(
+        db_column='idTypeThreshold', primary_key=True)
+    # Field name made lowercase.
+    nametypethreshold = models.CharField(
+        db_column='nameTypeThreshold', max_length=256, blank=False, null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'TypeThreshold'

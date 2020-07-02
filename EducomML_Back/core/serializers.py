@@ -3,6 +3,41 @@ from rest_framework import serializers
 from .models import *
 
 
+class RangeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Range
+        fields = ['url', 'idrange', 'namerange',
+                  'fk_idassessmentparameter', 'initialvalue', 'limitvalue']
+
+
+class SingleSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Single
+        fields = ['url', 'idsingle', 'fk_idassessmentparameter']
+
+
+class ScopoSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Scopo
+        fields = ['url', 'idscopo', 'typescopo']
+
+
+class TypetresholdSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Typetreshold
+        fields = ['url', 'idtypetreshold', 'nametypetreshold']
+
+
+class AssessmentparameterSerializer(serializers.HyperlinkedModelSerializer):
+    single = SingleSerializer(many=True, read_only=True)
+    range = RangeSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Assessmentparameter
+        fields = ['url', 'idassessmentparameter', 'typethreshold',
+                  'fk_idknowledgedomain', 'fk_idmodule', 'fk_idconcept', 'single', 'range']
+
+
 class AnswersalternativesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Answersalternatives
@@ -163,7 +198,7 @@ class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Knowledgedomain
-        fields = ['url', 'idknowledgedomain', 'nameknowledgedomain', 'author',
+        fields = ['url', 'idknowledgedomain', 'nameknowledgedomain',
                   'subtitle', 'lastversion', 'fk_iduser', 'modules', 'mobilemedias', 'instructionalelements']
 
 
@@ -176,7 +211,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'url', 'username', 'email','first_name', 'last_name', 'password', 'knowledgedomains']
+        fields = ['id', 'url', 'username', 'email', 'first_name',
+                  'last_name', 'password', 'knowledgedomains']
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):

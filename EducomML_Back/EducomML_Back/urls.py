@@ -26,6 +26,12 @@ router.register('questiontype', views.QuestiontypeViewSet)
 router.register('resolutionquestion', views.ResolutionquestionViewSet)
 router.register('answersalternatives', views.AnswersalternativesViewSet)
 
+router.register('assessmentparameter', views.AssessmentparameterViewSet)
+router.register('single', views.SingleViewSet)
+router.register('range', views.RangeViewSet)
+router.register('typethreshold', views.TypethresholdViewSet)
+router.register('scopo', views.ScopoViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
@@ -35,4 +41,3 @@ urlpatterns = [
     path('api-token-verify/', verify_jwt_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
-

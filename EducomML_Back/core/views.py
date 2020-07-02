@@ -9,6 +9,7 @@ from rest_framework.decorators import api_view, authentication_classes
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from .serializers import *
 
+
 @api_view(['POST'])
 @authentication_classes([JSONWebTokenAuthentication])
 def UserId(request):
@@ -16,7 +17,7 @@ def UserId(request):
     User = get_user_model().objects.get(username=username)
     response = Response()
     id = User.id
-    name = User.first_name+" "+User.last_name 
+    name = User.first_name+" "+User.last_name
     response.data = {
         'url': "http://localhost:8000/users/"+str(id)+"/",
         'complete_name': name
@@ -221,4 +222,59 @@ class AnswersalternativesViewSet(viewsets.ModelViewSet):
                             authentication.SessionAuthentication, authentication.BasicAuthentication]
     queryset = Answersalternatives.objects.all()
     serializer_class = AnswersalternativesSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class AssessmentparameterViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    authentication_class = [JSONWebTokenAuthentication,
+                            authentication.SessionAuthentication, authentication.BasicAuthentication]
+    queryset = Assessmentparameter.objects.all()
+    serializer_class = AssessmentparameterSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class SingleViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    authentication_class = [JSONWebTokenAuthentication,
+                            authentication.SessionAuthentication, authentication.BasicAuthentication]
+    queryset = Single.objects.all()
+    serializer_class = SingleSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class RangeViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    authentication_class = [JSONWebTokenAuthentication,
+                            authentication.SessionAuthentication, authentication.BasicAuthentication]
+    queryset = Range.objects.all()
+    serializer_class = RangeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class TypethresholdViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    authentication_class = [JSONWebTokenAuthentication,
+                            authentication.SessionAuthentication, authentication.BasicAuthentication]
+    queryset = Typethreshold.objects.all()
+    serializer_class = TypethresholdSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ScopoViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    authentication_class = [JSONWebTokenAuthentication,
+                            authentication.SessionAuthentication, authentication.BasicAuthentication]
+    queryset = Scopo.objects.all()
+    serializer_class = ScopoSerializer
     permission_classes = [permissions.IsAuthenticated]
