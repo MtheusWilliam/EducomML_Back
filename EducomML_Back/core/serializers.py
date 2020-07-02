@@ -13,7 +13,7 @@ class RangeSerializer(serializers.HyperlinkedModelSerializer):
 class SingleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Single
-        fields = ['url', 'idsingle', 'fk_idassessmentparameter']
+        fields = ['url', 'idsingle', 'fk_idassessmentparameter', 'threshold']
 
 
 class ScopoSerializer(serializers.HyperlinkedModelSerializer):
