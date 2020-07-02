@@ -22,10 +22,10 @@ class ScopoSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'idscopo', 'typescopo']
 
 
-class TypetresholdSerializer(serializers.HyperlinkedModelSerializer):
+class TypethresholdSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Typetreshold
-        fields = ['url', 'idtypetreshold', 'nametypetreshold']
+        model = Typethreshold
+        fields = ['url', 'idtypethreshold', 'nametypethreshold']
 
 
 class AssessmentparameterSerializer(serializers.HyperlinkedModelSerializer):
