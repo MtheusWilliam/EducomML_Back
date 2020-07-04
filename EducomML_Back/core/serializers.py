@@ -34,7 +34,7 @@ class AssessmentparameterSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Assessmentparameter
-        fields = ['url', 'idassessmentparameter', 'typethreshold',
+        fields = ['url', 'idassessmentparameter', 'typethreshold', 'scopo',
                   'fk_idknowledgedomain', 'fk_idmodule', 'fk_idconcept', 'single', 'range']
 
 

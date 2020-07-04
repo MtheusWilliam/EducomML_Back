@@ -10,12 +10,14 @@ class Assessmentparameter(models.Model):
     # Field name made lowercase.
     typethreshold = models.ForeignKey(
         'Typethreshold', blank=False, null=False, db_column='typeThreshold', on_delete=models.CASCADE)
+    scopo = models.ForeignKey(
+        'Scopo', blank=False, null=False, db_column='scopo', on_delete=models.CASCADE)
     fk_idknowledgedomain = models.ForeignKey(
-        'Knowledgedomain', blank=False, null=False, db_column='fk_idKnowledgeDomain', on_delete=models.CASCADE, related_name="AssessmentParameter")
+        'Knowledgedomain', blank=False, null=True, db_column='fk_idKnowledgeDomain', on_delete=models.CASCADE, related_name="AssessmentParameter")
     fk_idmodule = models.ForeignKey(
-        'Module', blank=False, null=False, db_column='fk_idModule', on_delete=models.CASCADE, related_name="AssessmentParameter")
+        'Module', blank=False, null=True, db_column='fk_idModule', on_delete=models.CASCADE, related_name="AssessmentParameter")
     fk_idconcept = models.ForeignKey(
-        'Concept', blank=False, null=False, db_column='fk_idConcept', on_delete=models.CASCADE, related_name="AssessmentParameter")
+        'Concept', blank=False, null=True, db_column='fk_idConcept', on_delete=models.CASCADE, related_name="AssessmentParameter")
 
     class Meta:
         managed = False
@@ -412,7 +414,7 @@ class Single(models.Model):
         'Assessmentparameter', blank=False, null=False, db_column='fk_idAssessmentParameter', on_delete=models.CASCADE, related_name="Single")
     # Field name made lowercase.
     threshold = models.CharField(
-        db_column='threshold', max_length=256, blank=False, null=False)
+        db_column='threshold', max_length=256, blank=True, null=True)
 
     class Meta:
         managed = False
