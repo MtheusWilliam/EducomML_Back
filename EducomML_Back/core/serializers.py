@@ -30,12 +30,12 @@ class TypethresholdSerializer(serializers.HyperlinkedModelSerializer):
 
 class AssessmentparameterSerializer(serializers.HyperlinkedModelSerializer):
     single = SingleSerializer(many=True, read_only=True)
-    range = RangeSerializer(many=True, read_only=True)
+    ranges = RangeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Assessmentparameter
         fields = ['url', 'idassessmentparameter', 'typethreshold', 'scopo',
-                  'fk_idknowledgedomain', 'fk_idmodule', 'fk_idconcept', 'single', 'range']
+                  'fk_idknowledgedomain', 'fk_idmodule', 'fk_idconcept', 'single', 'ranges']
 
 
 class AnswersalternativesSerializer(serializers.HyperlinkedModelSerializer):
@@ -158,11 +158,12 @@ class ConceptSerializer(serializers.HyperlinkedModelSerializer):
     informationitems = InformationitemSerializer(many=True, read_only=True)
     instructionalelements = InstructionalelementSerializer(
         many=True, read_only=True)
+    assessmentparameter = AssessmentparameterSerializer(many=True, read_only=True)
 
     class Meta:
         model = Concept
         fields = ['url', 'idconcept', 'nameconcept', 'fk_idknowledgedomain',
-                  'fk_idmodule', 'visible', 'sourceconcept', 'targetconcept', 'mobilemedias', 'informationitems', 'instructionalelements']
+                  'fk_idmodule', 'visible', 'sourceconcept', 'targetconcept', 'mobilemedias', 'informationitems', 'instructionalelements', 'assessmentparameter']
 
 
 class SubModuleSerializer(serializers.HyperlinkedModelSerializer):
@@ -170,11 +171,12 @@ class SubModuleSerializer(serializers.HyperlinkedModelSerializer):
     mobilemedias = MobilemediaSerializer(many=True, read_only=True)
     instructionalelements = InstructionalelementSerializer(
         many=True, read_only=True)
+    assessmentparameter = AssessmentparameterSerializer(many=True, read_only=True)
 
     class Meta:
         model = Module
         fields = ['url', 'idmodule', 'fk_idmodule', 'namemodule', 'subtitle',
-                  'idknowledgedomain', 'visible', 'concepts', 'mobilemedias', 'instructionalelements']
+                  'idknowledgedomain', 'visible', 'concepts', 'mobilemedias', 'instructionalelements', 'assessmentparameter']
 
 
 class ModuleSerializer(serializers.HyperlinkedModelSerializer):
@@ -183,11 +185,12 @@ class ModuleSerializer(serializers.HyperlinkedModelSerializer):
     mobilemedias = MobilemediaSerializer(many=True, read_only=True)
     instructionalelements = InstructionalelementSerializer(
         many=True, read_only=True)
+    assessmentparameter = AssessmentparameterSerializer(many=True, read_only=True)
 
     class Meta:
         model = Module
         fields = ['url', 'idmodule', 'fk_idmodule', 'namemodule', 'subtitle',
-                  'idknowledgedomain', 'visible', 'submodules', 'concepts', 'mobilemedias', 'instructionalelements']
+                  'idknowledgedomain', 'visible', 'submodules', 'concepts', 'mobilemedias', 'instructionalelements', 'assessmentparameter']
 
 
 class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
@@ -195,11 +198,12 @@ class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
     mobilemedias = MobilemediaSerializer(many=True, read_only=True)
     instructionalelements = InstructionalelementSerializer(
         many=True, read_only=True)
+    assessmentparameter = AssessmentparameterSerializer(many=True, read_only=True)
 
     class Meta:
         model = Knowledgedomain
         fields = ['url', 'idknowledgedomain', 'nameknowledgedomain',
-                  'subtitle', 'lastversion', 'fk_iduser', 'modules', 'mobilemedias', 'instructionalelements']
+                  'subtitle', 'lastversion', 'fk_iduser', 'modules', 'mobilemedias', 'instructionalelements', 'assessmentparameter']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

@@ -13,11 +13,11 @@ class Assessmentparameter(models.Model):
     scopo = models.ForeignKey(
         'Scopo', blank=False, null=False, db_column='scopo', on_delete=models.CASCADE)
     fk_idknowledgedomain = models.ForeignKey(
-        'Knowledgedomain', blank=False, null=True, db_column='fk_idKnowledgeDomain', on_delete=models.CASCADE, related_name="AssessmentParameter")
+        'Knowledgedomain', blank=False, null=True, db_column='fk_idKnowledgeDomain', on_delete=models.CASCADE, related_name="assessmentparameter")
     fk_idmodule = models.ForeignKey(
-        'Module', blank=False, null=True, db_column='fk_idModule', on_delete=models.CASCADE, related_name="AssessmentParameter")
+        'Module', blank=False, null=True, db_column='fk_idModule', on_delete=models.CASCADE, related_name="assessmentparameter")
     fk_idconcept = models.ForeignKey(
-        'Concept', blank=False, null=True, db_column='fk_idConcept', on_delete=models.CASCADE, related_name="AssessmentParameter")
+        'Concept', blank=False, null=True, db_column='fk_idConcept', on_delete=models.CASCADE, related_name="assessmentparameter")
 
     class Meta:
         managed = False
@@ -338,7 +338,7 @@ class Range(models.Model):
         db_column='nameRange', max_length=256, blank=False, null=False)
     # Field name made lowercase.
     fk_idassessmentparameter = models.ForeignKey(
-        'Assessmentparameter', blank=False, null=False, db_column='fk_idAssessmentParameter', on_delete=models.CASCADE, related_name="Range")
+        'Assessmentparameter', blank=False, null=False, db_column='fk_idAssessmentParameter', on_delete=models.CASCADE, related_name="ranges")
     # Field name made lowercase.
     initialvalue = models.IntegerField(
         db_column='initialValue', blank=False, null=False)
@@ -411,7 +411,7 @@ class Single(models.Model):
         db_column='idSingle', primary_key=True)
     # Field name made lowercase.
     fk_idassessmentparameter = models.ForeignKey(
-        'Assessmentparameter', blank=False, null=False, db_column='fk_idAssessmentParameter', on_delete=models.CASCADE, related_name="Single")
+        'Assessmentparameter', blank=False, null=False, db_column='fk_idAssessmentParameter', on_delete=models.CASCADE, related_name="single")
     # Field name made lowercase.
     threshold = models.CharField(
         db_column='threshold', max_length=256, blank=True, null=True)
