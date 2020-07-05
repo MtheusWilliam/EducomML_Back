@@ -9,6 +9,15 @@ from rest_framework.decorators import api_view, authentication_classes
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from .serializers import *
 
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
+from core.tokens import account_activation_token
+from django.views.generic import View
+from django.shortcuts import redirect
+from rest_framework.authtoken.models import Token
+
 
 @api_view(['POST'])
 @authentication_classes([JSONWebTokenAuthentication])
@@ -24,6 +33,21 @@ def UserId(request):
     }
     return response
 
+class AccountVerification(View):
+
+    def get(self, request, uidb64, token, *args, **kwargs):
+        try:
+            response = Response()
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user is not None and account_activation_token.check_token(user, token):
+            user.is_active = True
+            user.save()
+            return redirect(url)
+        return redirect('http://localhost:8080/')
 
 class UserViewSet(viewsets.ModelViewSet):
     """

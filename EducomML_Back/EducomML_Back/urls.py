@@ -32,6 +32,8 @@ router.register('range', views.RangeViewSet)
 router.register('typethreshold', views.TypethresholdViewSet)
 router.register('scopo', views.ScopoViewSet)
 
+app_name = "EducomML_Back"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
@@ -39,5 +41,6 @@ urlpatterns = [
     path('api-token-auth/', obtain_jwt_token),
     path('api-token-refresh/', refresh_jwt_token),
     path('api-token-verify/', verify_jwt_token),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('email_confirmation/<uidb64>/<token>/', views.AccountVerification.as_view(), name="email_confirmation"),
 ]
