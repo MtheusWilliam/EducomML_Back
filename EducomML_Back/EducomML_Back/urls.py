@@ -32,6 +32,9 @@ router.register('range', views.RangeViewSet)
 router.register('typethreshold', views.TypethresholdViewSet)
 router.register('scopo', views.ScopoViewSet)
 
+router.register('priorknowledge', views.PriorknowledgeViewSet)
+router.register('priorlevel', views.PriorlevelViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),

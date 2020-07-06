@@ -280,7 +280,8 @@ class Phaseprocedure(models.Model):
     # Field name made lowercase.
     idphaseprocedure = models.AutoField(
         db_column='idPhaseProcedure', primary_key=True)
-    order = models.IntegerField()
+    order = models.IntegerField(
+        db_column='order', blank=False, null=False)
     description = models.CharField(max_length=256, blank=True, null=True)
     # Field name made lowercase.
     fk_informationitem = models.ForeignKey(
@@ -290,6 +291,37 @@ class Phaseprocedure(models.Model):
         managed = False
         db_table = 'PhaseProcedure'
         ordering = ['order']
+
+
+class Priorknowledge(models.Model):
+    # Field name made lowercase.
+    idpriorknowledge = models.AutoField(
+        db_column='idPriorKnowledge', primary_key=True)
+    namepriorknowledge = models.CharField(
+        db_column='namePriorKnowledge', max_length=256, blank=False, null=False)
+    priorlevel = models.ForeignKey(
+        'Priorlevel', db_column='priorLevel', on_delete=models.CASCADE, blank=False, null=False)
+    # Field name made lowercase.
+    fk_idconcept = models.ForeignKey(
+        'Concept', db_column='fk_idConcept', blank=False, null=False, related_name='priorknowledge', on_delete=models.CASCADE)
+
+    class Meta:
+        managed = False
+        db_table = 'PriorKnowledge'
+        ordering = ['idpriorknowledge']
+
+
+class Priorlevel(models.Model):
+    # Field name made lowercase.
+    idpriorlevel = models.AutoField(
+        db_column='idPriorLevel', primary_key=True)
+    typepriorlevel = models.CharField(
+        db_column='typePriorLevel', max_length=256, blank=False, null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'PriorLevel'
+        ordering = ['idpriorlevel']
 
 
 class Question(models.Model):

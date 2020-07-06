@@ -278,3 +278,25 @@ class ScopoViewSet(viewsets.ModelViewSet):
     queryset = Scopo.objects.all()
     serializer_class = ScopoSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class PriorknowledgeViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    authentication_class = [JSONWebTokenAuthentication,
+                            authentication.SessionAuthentication, authentication.BasicAuthentication]
+    queryset = Priorknowledge.objects.all()
+    serializer_class = PriorknowledgeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class PriorlevelViewSet(viewsets.ModelViewSet):
+    """
+    point that allows groups to be viewed or edited.
+    """
+    authentication_class = [JSONWebTokenAuthentication,
+                            authentication.SessionAuthentication, authentication.BasicAuthentication]
+    queryset = Priorlevel.objects.all()
+    serializer_class = PriorlevelSerializer
+    permission_classes = [permissions.IsAuthenticated]
