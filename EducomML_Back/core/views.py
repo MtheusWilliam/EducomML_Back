@@ -33,6 +33,7 @@ def UserId(request):
     }
     return response
 
+
 class AccountVerification(View):
 
     def get(self, request, uidb64, token, *args, **kwargs):
@@ -48,6 +49,7 @@ class AccountVerification(View):
             user.save()
             return redirect(url)
         return redirect('http://localhost:8080/')
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """

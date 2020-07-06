@@ -1,9 +1,14 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .models import *
+from django.contrib import messages
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.template.loader import render_to_string
+from core.tokens import account_activation_token
 
 
-<<<<<<< HEAD
 class PriorlevelSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Priorlevel
@@ -15,14 +20,6 @@ class PriorknowledgeSerializer(serializers.HyperlinkedModelSerializer):
         model = Priorknowledge
         fields = ['url', 'idpriorknowledge', 'namepriorknowledge',
                   'priorlevel', 'fk_idconcept']
-=======
-from django.contrib import messages
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-from django.template.loader import render_to_string
-from core.tokens import account_activation_token
->>>>>>> 9b81aea38a59ef97de6269da6ca1287e3675d979
 
 
 class RangeSerializer(serializers.HyperlinkedModelSerializer):
@@ -236,16 +233,16 @@ class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     knowledgedomains = KnowledgedomainSerializer(many=True, read_only=True)
 
-    def create(self,validated_data):
+    def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         user.is_active = False
         subject = "Ola,porfavor confirme o seu email"
         message = render_to_string('email_template.html', {
-                            'user': user,
-                            'domain': 'localhost:8000',
-                            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                            'token': account_activation_token.make_token(user),
-                        })
+            'user': user,
+            'domain': 'localhost:8000',
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': account_activation_token.make_token(user),
+        })
         user.email_user(subject, message)
         return user
 
