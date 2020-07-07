@@ -3,10 +3,12 @@ from django.contrib.auth import authenticate, get_user_model
 from .models import *
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import authentication
-from rest_framework.decorators import api_view, authentication_classes
+from rest_framework.decorators import api_view, authentication_classes,permission_classes
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_jwt.settings import api_settings
 from .serializers import *
 
 from django.contrib.auth import login
@@ -17,6 +19,9 @@ from core.tokens import account_activation_token
 from django.views.generic import View
 from django.shortcuts import redirect
 from rest_framework.authtoken.models import Token
+
+jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
 @api_view(['POST'])
@@ -33,6 +38,60 @@ def UserId(request):
     }
     return response
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def ResetPassword(request):
+    email = request.data.get('email')
+    response = Response()
+    try:
+        user = User.objects.get(email=email)
+        subject = "Ola,porfavor confirme o seu email"
+        message = render_to_string('reset_password.html', {
+            'user': user,
+            'domain': 'localhost:8000',
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': account_activation_token.make_token(user),
+        })
+        user.email_user(subject, message)
+        response.data = { 'message': 'Email enviado com sucesso' }
+    except:
+        response.data = { 'message': 'Email nao cadastrado' }
+    
+    return response
+
+@api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+def UpdatePassword(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        u = User.objects.get(username=username)
+        u.set_password(password)
+        username = user.username
+        payload = jwt_payload_handler(user)
+        token = jwt_encode_handler(payload)
+        response =Response()
+        response.data = {
+            'token': token,
+        }
+        return response
+
+class ResetPasswordRedirect(View):
+
+    def get(self, request, uidb64, token, *args, **kwargs):
+        try:
+            response = Response()
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user is not None and account_activation_token.check_token(user, token):
+            username = user.username
+            payload = jwt_payload_handler(user)
+            token = jwt_encode_handler(payload)
+            return redirect('http://localhost:8080/reset-password/%s/%s'%(username,token))
+        return redirect('http://localhost:8080/')
+
 
 class AccountVerification(View):
 
@@ -47,7 +106,7 @@ class AccountVerification(View):
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
-            return redirect(url)
+            return redirect('http://localhost:8080/')
         return redirect('http://localhost:8080/')
 
 

@@ -156,6 +156,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-CSRFTOKEN',
+    'Access-Control-Allow-Origin',
 ]
 
 EMAIL_USE_TLS = True
