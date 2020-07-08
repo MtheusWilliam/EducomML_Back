@@ -6,7 +6,7 @@ from rest_framework import permissions
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import authentication
-from rest_framework.decorators import api_view, authentication_classes,permission_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework_jwt.settings import api_settings
 from .serializers import *
@@ -38,6 +38,7 @@ def UserId(request):
     }
     return response
 
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def ResetPassword(request):
@@ -45,7 +46,7 @@ def ResetPassword(request):
     response = Response()
     try:
         user = User.objects.get(email=email)
-        subject = "Ola,porfavor confirme o seu email"
+        subject = "Redefinição de senha | EducomML"
         message = render_to_string('reset_password.html', {
             'user': user,
             'domain': 'localhost:8000',
@@ -53,27 +54,30 @@ def ResetPassword(request):
             'token': account_activation_token.make_token(user),
         })
         user.email_user(subject, message)
-        response.data = { 'message': 'Email enviado com sucesso' }
+        response.data = {
+            'status': 1, 'message': 'Email para redefinição de senha enviado com sucesso! Verifique sua caixa de emails.'}
     except:
-        response.data = { 'message': 'Email nao cadastrado' }
-    
+        response.data = {'status': 0, 'message': 'Email não cadastrado'}
+
     return response
+
 
 @api_view(['POST'])
 @authentication_classes([JSONWebTokenAuthentication])
 def UpdatePassword(request):
-        username = request.data.get('username')
-        password = request.data.get('password')
-        user = User.objects.get(username=username)
-        user.set_password(password)
-        payload = jwt_payload_handler(user)
-        token = jwt_encode_handler(payload)
-        response =Response()
-        response.data = {
-            'username': username,
-            'token': token,
-        }
-        return response
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = User.objects.get(username=username)
+    user.set_password(password)
+    payload = jwt_payload_handler(user)
+    token = jwt_encode_handler(payload)
+    response = Response()
+    response.data = {
+        'username': username,
+        'token': token,
+    }
+    return response
+
 
 class ResetPasswordRedirect(View):
 
@@ -89,7 +93,7 @@ class ResetPasswordRedirect(View):
             username = user.username
             payload = jwt_payload_handler(user)
             token = jwt_encode_handler(payload)
-            return redirect('http://localhost:8080/reset_password/%s/%s'%(username,token))
+            return redirect('http://localhost:8080/reset_password/%s/%s' % (username, token))
         return redirect('http://localhost:8080/')
 
 
@@ -106,8 +110,8 @@ class AccountVerification(View):
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
-            return redirect('http://localhost:8080/')
-        return redirect('http://localhost:8080/')
+            return redirect('http://localhost:8080/1')
+        return redirect('http://localhost:8080/0')
 
 
 class UserViewSet(viewsets.ModelViewSet):

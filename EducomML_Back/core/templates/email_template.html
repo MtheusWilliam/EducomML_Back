@@ -1,7 +1,7 @@
 {% autoescape off %}
-Hi {{ user.username }},
+Olá {{ user.username }}!
 
-Please click on the link below to confirm your registration:
+Por favor, clique no link abaixo para ativar o seu cadastro e começar a usar a plataforma EducomMl:
 
 http://{{ domain }}{% url 'email_confirmation' uid token %}
 {% endautoescape %}

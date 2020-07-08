@@ -236,7 +236,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         user.is_active = False
-        subject = "Ola,porfavor confirme o seu email"
+        subject = "Email de confirmação | Confirme seu cadastro na plataforma EducomML"
         message = render_to_string('email_template.html', {
             'user': user,
             'domain': 'localhost:8000',
