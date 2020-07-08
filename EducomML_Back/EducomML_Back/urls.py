@@ -46,7 +46,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('email_confirmation/<uidb64>/<token>/',
          views.AccountVerification.as_view(), name="email_confirmation"),
-    path('reset-password/<uidb64>/<token>/',
+    path('reset_password/<uidb64>/<token>/',
          views.ResetPasswordRedirect.as_view() , name="reset_password"),
     path('', include(router.urls)),
 ]

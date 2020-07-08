@@ -61,16 +61,16 @@ def ResetPassword(request):
 
 @api_view(['POST'])
 @authentication_classes([JSONWebTokenAuthentication])
-def UpdatePassword(self, request, *args, **kwargs):
+def UpdatePassword(request):
         username = request.data.get('username')
         password = request.data.get('password')
-        u = User.objects.get(username=username)
-        u.set_password(password)
-        username = user.username
+        user = User.objects.get(username=username)
+        user.set_password(password)
         payload = jwt_payload_handler(user)
         token = jwt_encode_handler(payload)
         response =Response()
         response.data = {
+            'username': username,
             'token': token,
         }
         return response
@@ -89,7 +89,7 @@ class ResetPasswordRedirect(View):
             username = user.username
             payload = jwt_payload_handler(user)
             token = jwt_encode_handler(payload)
-            return redirect('http://localhost:8080/reset-password/%s/%s'%(username,token))
+            return redirect('http://localhost:8080/reset_password/%s/%s'%(username,token))
         return redirect('http://localhost:8080/')
 
 
