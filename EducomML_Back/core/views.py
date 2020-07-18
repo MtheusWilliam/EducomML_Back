@@ -110,8 +110,8 @@ class AccountVerification(View):
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
-            return redirect('http://localhost:8080/1')
-        return redirect('http://localhost:8080/0')
+            return redirect('http://localhost:8080/login/1')
+        return redirect('http://localhost:8080/login/0')
 
 
 class UserViewSet(viewsets.ModelViewSet):
