@@ -53,7 +53,8 @@ class Concept(models.Model):
     # Field name made lowercase.
     idconcept = models.AutoField(db_column='idConcept', primary_key=True)
     # Field name made lowercase.
-    nameconcept = models.CharField(db_column='nameConcept', max_length=256)
+    nameconcept = models.CharField(
+        db_column='nameConcept', max_length=100, blank=False, null=False)
     # Field name made lowercase.
     fk_idconcept = models.BigIntegerField(
         db_column='fk_idConcept', blank=True, null=True)
@@ -164,10 +165,10 @@ class Knowledgedomain(models.Model):
     #   db_column='idKnowledgeDomain', primary_key=True)
     # Field name made lowercase.
     nameknowledgedomain = models.CharField(
-        db_column='nameKnowledgeDomain', max_length=45, blank=True, null=False)
+        db_column='nameKnowledgeDomain', max_length=100, blank=False, null=False)
     # Field name made lowercase.
     subtitle = models.CharField(
-        db_column='subTitle', max_length=45, blank=True, null=True)
+        db_column='subTitle', max_length=100, blank=True, null=True)
     # Field name made lowercase.
     lastversion = models.CharField(
         db_column='lastVersion', max_length=45, blank=True, null=True)
@@ -196,10 +197,11 @@ class Module(models.Model):
     idmodule = models.AutoField(
         db_column='idModule', primary_key=True)
     # Field name made lowercase.
-    namemodule = models.CharField(db_column='nameModule', max_length=256)
+    namemodule = models.CharField(
+        db_column='nameModule', max_length=100, blank=False, null=False)
     # Field name made lowercase.
     subtitle = models.CharField(
-        db_column='subTitle', max_length=45, blank=True, null=True)
+        db_column='subTitle', max_length=100, blank=True, null=True)
     idknowledgedomain = models.ForeignKey(
         Knowledgedomain, db_column='idKnowledgeDomain', blank=True, null=False, related_name='modules', on_delete=models.CASCADE)
     # Field name made lowercase.
@@ -239,6 +241,8 @@ class Mobilemedia(models.Model):
         'Concept', db_column='fk_idConcept',  blank=True, null=True, related_name='mobilemedias', on_delete=models.CASCADE)
     fk_idquestion = models.ForeignKey(
         'Question', db_column='fk_idQuestion', blank=True, null=True, on_delete=models.CASCADE, related_name='mobilemedias')
+    fk_idphaseprocedure = models.ForeignKey(
+        'Phaseprocedure', db_column='fk_idPhaseProcedure', blank=True, null=True, on_delete=models.CASCADE, related_name='mobilemedias')
     difficultyLevel = models.IntegerField(
         db_column='difficultyLevel', blank=True, null=True)
     learningStyle = models.IntegerField(
