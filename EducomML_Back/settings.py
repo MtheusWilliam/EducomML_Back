@@ -98,7 +98,7 @@ else:
     SECRET_KEY = '!2a7s1d#9#1d93g(%7lnf=r8!#$p)u_9!ly5e@1ilcq(fs&bu8'
 
 if in_heroku:
-    DEBUG = False
+    DEBUG = True
     DATABASES = {'default': dj_database_url.config()}
 else:
     DATABASES = {
