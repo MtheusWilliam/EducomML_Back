@@ -84,6 +84,10 @@ WSGI_APPLICATION = 'EducomML_Back.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+if 'DATABASE_URL' in os.environ:
+    in_heroku = True
+    SECRET_KEY = 'default'
+    ALLOWED_HOSTS = ['educomml-back.herokuapp.com', ]
 
 if in_heroku:
     DEBUG = False
@@ -171,8 +175,3 @@ EMAIL_HOST_PASSWORD = 'incorreta!2'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # HEROKU
-
-if 'DATABASE_URL' in os.environ:
-    in_heroku = True
-    SECRET_KEY = 'default'
-    ALLOWED_HOSTS = ['educomml-back.herokuapp.com', ]
