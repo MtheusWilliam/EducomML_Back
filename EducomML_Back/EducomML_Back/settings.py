@@ -170,4 +170,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 if 'DATABASE_URL' in os.environ:
     in_heroku = True
     SECRET_KEY = 'default'
-    ALLOWED_HOSTS = ['herokuhigiaapp.herokuapp.com', ]
+    ALLOWED_HOSTS = ['educomml-back.herokuapp.com', ]
