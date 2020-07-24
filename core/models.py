@@ -456,6 +456,8 @@ class Single(models.Model):
         managed = False
         db_table = 'Single'
 
+# testingheroku
+
 
 class Scopo(models.Model):
     # Field name made lowercase.
