@@ -1,1 +1,0 @@
-web: gunicorn  EducomML_Back.wsgi
