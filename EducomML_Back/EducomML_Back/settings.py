@@ -84,16 +84,21 @@ WSGI_APPLICATION = 'EducomML_Back.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bd_educomml',
-        'USER': 'postgres',
-        'PASSWORD': '8729mM.@',
-        'HOST': 'localhost',
-        'PORT':  '5432',
+
+if in_heroku:
+    DEBUG = False
+    DATABASES = {'default': dj_database_url.config()}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'bd_educomml',
+            'USER': 'postgres',
+            'PASSWORD': '8729mM.@',
+            'HOST': 'localhost',
+            'PORT':  '5432',
+        }
     }
-}
 
 
 # Password validation
