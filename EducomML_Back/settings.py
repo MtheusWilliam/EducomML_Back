@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import datetime
 from corsheaders.defaults import default_headers
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -165,3 +166,4 @@ EMAIL_HOST_PASSWORD = 'incorreta!2'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # HEROKU
+django_heroku.settings(locals())
