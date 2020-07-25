@@ -150,11 +150,12 @@ class InformationitemSerializer(serializers.HyperlinkedModelSerializer):
     phaseprocedures = PhaseprocedureSerializer(
         many=True, read_only=True
     )
+    mobilemedias = MobilemediaSerializer(many=True, read_only=True)
 
     class Meta:
         model = Informationitem
         fields = ['url', 'idinformationitem', 'nameinformationitem',  'descriptioninformationitem',
-                  'fk_informationitemtype', 'fk_idconcept', 'visible', "informationitemtypes", 'phaseprocedures']
+                  'fk_informationitemtype', 'fk_idconcept', 'visible', "informationitemtypes", 'phaseprocedures', 'mobilemedias']
 
 
 class ReferencetypeSerializer(serializers.HyperlinkedModelSerializer):
