@@ -10,7 +10,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import datetime
 from corsheaders.defaults import default_headers
-import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,13 +18,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '!2a7s1d#9#1d93g(%7lnf=r8!#$p)u_9!ly5e@1ilcq(fs&bu8'
+SECRET_KEY = '!2a7s1d#9#1d93g(%7lnf=r8!#$p)u_9!ly5e@1ilcq(fs&bu8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-in_heroku = False
-SECRET_KEY = ""
 
 ALLOWED_HOSTS = []
 
@@ -46,7 +42,6 @@ INSTALLED_APPS = [
 
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -86,27 +81,16 @@ WSGI_APPLICATION = 'EducomML_Back.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
-    in_heroku = True
-    SECRET_KEY = 'default'
-    ALLOWED_HOSTS = ['educomml-back.herokuapp.com', ]
-else:
-    SECRET_KEY = '!2a7s1d#9#1d93g(%7lnf=r8!#$p)u_9!ly5e@1ilcq(fs&bu8'
-
-if in_heroku:
-    DEBUG = False
-    DATABASES = {'default': dj_database_url.config()}
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'bd_educomml',
-            'USER': 'postgres',
-            'PASSWORD': '8729mM.@',
-            'HOST': 'localhost',
-            'PORT':  '5432',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'bd_educomml',
+        'USER': 'postgres',
+        'PASSWORD': '8729mM.@',
+        'HOST': 'localhost',
+        'PORT':  '5432',
     }
+}
 
 
 # Password validation
@@ -162,7 +146,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATIC_URL = '/static/'
 
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
