@@ -1,0 +1,7 @@
+{% autoescape off %}
+Olá {{ user.username }}!
+
+Por favor, clique no link abaixo para ativar o seu cadastro e começar a usar a plataforma EducomMl:
+
+http://{{ domain }}{% url 'email_confirmation' uid token %}
+{% endautoescape %}
