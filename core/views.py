@@ -33,7 +33,7 @@ def UserId(request):
     id = User.id
     name = User.first_name+" "+User.last_name
     response.data = {
-        'url': "http://localhost:8000/users/"+str(id)+"/",
+        'url': "https://educomml-back.herokuapp.com/users/"+str(id)+"/",
         'complete_name': name
     }
     return response
@@ -49,7 +49,7 @@ def ResetPassword(request):
         subject = "Redefinição de senha | EducomML"
         message = render_to_string('reset_password.html', {
             'user': user,
-            'domain': 'localhost:8000',
+            'domain': 'https://educomml-back.herokuapp.com/',
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
@@ -93,8 +93,8 @@ class ResetPasswordRedirect(View):
             username = user.username
             payload = jwt_payload_handler(user)
             token = jwt_encode_handler(payload)
-            return redirect('http://localhost:8080/reset_password/%s/%s' % (username, token))
-        return redirect('http://localhost:8080/')
+            return redirect('https://educomml-back.herokuapp.com/reset_password/%s/%s' % (username, token))
+        return redirect('https://educomml-back.herokuapp.com/')
 
 
 class AccountVerification(View):
@@ -110,8 +110,8 @@ class AccountVerification(View):
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
-            return redirect('http://localhost:8080/login/1')
-        return redirect('http://localhost:8080/login/0')
+            return redirect('https://educomml-back.herokuapp.com/login/1')
+        return redirect('https://educomml-back.herokuapp.com/login/0')
 
 
 class UserViewSet(viewsets.ModelViewSet):
