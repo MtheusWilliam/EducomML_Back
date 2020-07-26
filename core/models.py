@@ -20,7 +20,7 @@ class Assessmentparameter(models.Model):
         'Concept', blank=False, null=True, db_column='fk_idConcept', on_delete=models.CASCADE, related_name="assessmentparameter")
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'AssessmentParameter'
         ordering = ['idassessmentparameter']
 
@@ -43,7 +43,7 @@ class Answersalternatives(models.Model):
         db_column='orderAnswerAlternatives', blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'AnswersAlternatives'
         ordering = ['orderansweralternatives']
 
@@ -68,7 +68,7 @@ class Concept(models.Model):
         db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Concept'
         ordering = ['idconcept']
 
@@ -93,7 +93,7 @@ class Informationitem(models.Model):
         db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'InformationItem'
         ordering = ['idinformationitem']
 
@@ -107,7 +107,7 @@ class Informationitemtype(models.Model):
         db_column='nameInformationItemType', max_length=256)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'InformationItemType'
 
 
@@ -123,7 +123,7 @@ class Instrucelementtype(models.Model):
         db_column='idCategory', blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'InstrucElementType'
 
 
@@ -151,7 +151,7 @@ class Instructionalelement(models.Model):
         db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'InstructionalElement'
         ordering = ['idinstructionalelement']
 
@@ -176,7 +176,7 @@ class Knowledgedomain(models.Model):
         User, db_column='fk_idUser', blank=False, null=False, related_name='knowledgedomains', on_delete=models.CASCADE)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'KnowledgeDomain'
         ordering = ['idknowledgedomain']
 
@@ -188,7 +188,7 @@ class Mediatype(models.Model):
         db_column='nameMediaType', max_length=256, blank=True, null=False)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'MediaType'
 
 
@@ -211,7 +211,7 @@ class Module(models.Model):
         db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Module'
         ordering = ['idmodule']
 
@@ -275,7 +275,7 @@ class Mobilemedia(models.Model):
         db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'MobileMedia'
         ordering = ['idmobilemedia']
 
@@ -292,7 +292,7 @@ class Phaseprocedure(models.Model):
         Informationitem, db_column='fk_InformationItem', related_name='phaseprocedures', on_delete=models.CASCADE)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'PhaseProcedure'
         ordering = ['order']
 
@@ -310,7 +310,7 @@ class Priorknowledge(models.Model):
         'Concept', db_column='fk_idConcept', blank=False, null=False, related_name='priorknowledge', on_delete=models.CASCADE)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'PriorKnowledge'
         ordering = ['idpriorknowledge']
 
@@ -323,7 +323,7 @@ class Priorlevel(models.Model):
         db_column='typePriorLevel', max_length=256, blank=False, null=False)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'PriorLevel'
         ordering = ['idpriorlevel']
 
@@ -347,7 +347,7 @@ class Question(models.Model):
         'InstructionalElement', db_column='fk_idInstructionalElement', blank=True, null=True, on_delete=models.CASCADE, related_name='questions')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Question'
         ordering = ['orderquestion']
 
@@ -361,7 +361,7 @@ class Questiontype(models.Model):
         db_column='nameQuestionType', max_length=256, blank=False, null=False)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'QuestionType'
 
 
@@ -383,7 +383,7 @@ class Range(models.Model):
         db_column='limitValue', blank=False, null=False)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Range'
 
 
@@ -402,7 +402,7 @@ class Resolutionquestion(models.Model):
         'Question', db_column='fk_idQuestion', blank=True, null=True, on_delete=models.CASCADE, related_name='resolutionquestion')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ResolutionQuestion'
 
 
@@ -424,7 +424,7 @@ class Reference(models.Model):
         db_column='nameReference', max_length=256, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Reference'
 
 
@@ -437,7 +437,7 @@ class Referencetype(models.Model):
         db_column='nameRerefenceType', max_length=256)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Referencetype'
 
 
@@ -453,7 +453,7 @@ class Single(models.Model):
         db_column='threshold', max_length=256, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Single'
 
 # testingheroku
@@ -468,7 +468,7 @@ class Scopo(models.Model):
         db_column='typeScopo', max_length=256, blank=False, null=False)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Scopo'
 
 
@@ -481,5 +481,5 @@ class Typethreshold(models.Model):
         db_column='nameTypeThreshold', max_length=256, blank=False, null=False)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'TypeThreshold'
