@@ -93,8 +93,8 @@ class ResetPasswordRedirect(View):
             username = user.username
             payload = jwt_payload_handler(user)
             token = jwt_encode_handler(payload)
-            return redirect('https://educomml-back.herokuapp.com/reset_password/%s/%s' % (username, token))
-        return redirect('https://educomml-back.herokuapp.com/')
+            return redirect('https://educomml.web.app/reset_password/%s/%s' % (username, token))
+        return redirect('https://educomml.web.app/')
 
 
 class AccountVerification(View):
@@ -110,8 +110,8 @@ class AccountVerification(View):
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
-            return redirect('https://educomml-back.herokuapp.com/login/1')
-        return redirect('https://educomml-back.herokuapp.com/login/0')
+            return redirect('https://educomml.web.app/login/1')
+        return redirect('https://educomml.web.app/login/0')
 
 
 class UserViewSet(viewsets.ModelViewSet):
