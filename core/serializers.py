@@ -243,7 +243,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         subject = "Email de confirmação | Confirme seu cadastro na plataforma EducomML"
         message = render_to_string('email_template.html', {
             'user': user,
-            'domain': 'localhost:8000',
+            'domain': 'https://educomml-back.herokuapp.com',
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })

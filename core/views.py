@@ -49,7 +49,7 @@ def ResetPassword(request):
         subject = "Redefinição de senha | EducomML"
         message = render_to_string('reset_password.html', {
             'user': user,
-            'domain': 'https://educomml-back.herokuapp.com/',
+            'domain': 'https://educomml-back.herokuapp.com',
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
