@@ -89,7 +89,7 @@ class MobilemediaSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Mobilemedia
-        fields = ['url', 'idmobilemedia', 'label', 'fk_informationitem', 'fk_idmediatype', 'fk_idknowledgedomain', 'fk_module', 'fk_idinstructionalelement', 'fk_idconcept', 'fk_idquestion',
+        fields = ['url', 'idmobilemedia', 'label', 'fk_informationitem', 'fk_idmediatype', 'fk_idknowledgedomain', 'fk_module', 'fk_idinstructionalelement', 'fk_idconcept', 'fk_idquestion', 'fk_idphaseprocedure',
                   'difficultyLevel', 'learningStyle', 'visible', 'path', 'namefile', 'resolution', 'description', 'time', 'textfull', 'textshort', 'urllink', 'mediatypes']
 
 
