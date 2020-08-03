@@ -145,7 +145,6 @@ class KnowledgedomainViewSet(viewsets.ModelViewSet):
                             authentication.SessionAuthentication, authentication.BasicAuthentication]
     queryset = Knowledgedomain.objects.all()
     serializer_class = KnowledgedomainSerializer
-    authentication_class = [JSONWebTokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 
