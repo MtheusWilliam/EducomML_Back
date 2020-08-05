@@ -19,7 +19,7 @@ class PriorknowledgeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Priorknowledge
         fields = ['url', 'idpriorknowledge', 'namepriorknowledge',
-                  'priorlevel', 'fk_idconcept']
+                  'priorlevel', 'fk_priorsourceconcept', 'fk_priortargetconcept']
 
 
 class RangeSerializer(serializers.HyperlinkedModelSerializer):
@@ -183,12 +183,12 @@ class ConceptSerializer(serializers.HyperlinkedModelSerializer):
         many=True, read_only=True)
     assessmentparameter = AssessmentparameterSerializer(
         many=True, read_only=True)
-    priorknowledge = PriorknowledgeSerializer(many=True, read_only=True)
+    targetpriorknowledge = PriorknowledgeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Concept
         fields = ['url', 'idconcept', 'nameconcept', 'fk_idknowledgedomain',
-                  'fk_idmodule', 'visible', 'sourceconcept', 'targetconcept', 'mobilemedias', 'informationitems', 'instructionalelements', 'assessmentparameter', 'priorknowledge']
+                  'fk_idmodule', 'visible', 'sourceconcept', 'targetconcept', 'mobilemedias', 'informationitems', 'instructionalelements', 'assessmentparameter', 'targetpriorknowledge']
 
 
 class SubModuleSerializer(serializers.HyperlinkedModelSerializer):
