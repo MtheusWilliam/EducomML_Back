@@ -251,12 +251,26 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        password = validated_data['password']
-        user = User.objects.get(username=validated_data['username'])
-        user.set_password(password)
-        user.is_active = True
-        user.save()
-        return user
+        
+        old_password, password = validated_data['password'].split("º")
+        username = validated_data['username']
+        
+        if username != "0":
+            instance.username = username
+        if password != "0" and instance.check_password(old_password):
+            instance.set_password(password)
+        if validated_data.get("first_name"):
+            print("dsd2")
+            instance.first_name = validated_data['first_name']
+        if validated_data.get("last_name"):
+            print("dsd3")
+            instance.last_name = validated_data['last_name']
+        print("dsd")
+        instance.is_active = True
+       
+        instance.save()
+        
+        return instance
 
     class Meta:
         model = User
