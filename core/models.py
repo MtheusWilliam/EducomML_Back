@@ -1,8 +1,24 @@
+<<<<<<< HEAD
 
 from django.db import models
 from django.contrib.auth.models import User, Group
 
 
+=======
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class User(AbstractUser):
+    description = models.CharField(max_length=100, default='')
+    city = models.CharField(max_length=100, default='')
+    phone_number = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='profile_image', blank=True)
+
+    def __str__(self):
+        return self.email
+
+>>>>>>> 8a4d1bc5da85f232fc9afed6d358a7e45a92b863
 class Assessmentparameter(models.Model):
     # Field name made lowercase.
     idassessmentparameter = models.AutoField(

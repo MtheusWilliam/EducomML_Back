@@ -154,8 +154,22 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
+<<<<<<< HEAD
     'X-CSRFTOKEN',
     'Access-Control-Allow-Origin',
+=======
+    
+    'Access-Control-Allow-Origin',
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+>>>>>>> 8a4d1bc5da85f232fc9afed6d358a7e45a92b863
 ]
 
 EMAIL_USE_TLS = True
@@ -164,6 +178,10 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'testeeducommlback@gmail.com'
 EMAIL_HOST_PASSWORD = 'incorreta!2'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+<<<<<<< HEAD
+=======
+AUTH_USER_MODEL = 'core.User' # new
+>>>>>>> 8a4d1bc5da85f232fc9afed6d358a7e45a92b863
 
 # HEROKU
 django_heroku.settings(locals())

@@ -7,7 +7,10 @@ from rest_framework_jwt.views import *
 
 router = routers.DefaultRouter()
 router.register('users', views.UserViewSet)
+<<<<<<< HEAD
 router.register('groups', views.GroupViewSet)
+=======
+>>>>>>> 8a4d1bc5da85f232fc9afed6d358a7e45a92b863
 router.register('knowledgedomain', views.KnowledgedomainViewSet)
 router.register('module', views.ModuleViewSet)
 router.register('concept', views.ConceptViewSet)
