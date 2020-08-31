@@ -1,7 +1,5 @@
-<<<<<<< HEAD
+
 from django.contrib.auth.models import User, Group
-=======
->>>>>>> 8a4d1bc5da85f232fc9afed6d358a7e45a92b863
 from django.contrib.auth import authenticate, get_user_model
 from .models import *
 from rest_framework import viewsets
@@ -15,10 +13,6 @@ from rest_framework_jwt.settings import api_settings
 from .serializers import *
 
 from django.contrib.auth import login
-<<<<<<< HEAD
-from django.contrib.auth.models import User
-=======
->>>>>>> 8a4d1bc5da85f232fc9afed6d358a7e45a92b863
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from core.tokens import account_activation_token
@@ -130,22 +124,6 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-<<<<<<< HEAD
-
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    authentication_class = [JSONWebTokenAuthentication,
-                            authentication.SessionAuthentication, authentication.BasicAuthentication]
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    authentication_class = [JSONWebTokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
-
-
-=======
->>>>>>> 8a4d1bc5da85f232fc9afed6d358a7e45a92b863
 class KnowledgedomainViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.

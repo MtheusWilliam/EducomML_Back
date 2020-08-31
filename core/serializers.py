@@ -89,9 +89,7 @@ class MobilemediaSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Mobilemedia
-
-
-fields = ['url', 'idmobilemedia', 'label', 'fk_informationitem', 'fk_idmediatype', 'fk_idknowledgedomain', 'fk_module', 'fk_idinstructionalelement', 'fk_idconcept', 'fk_idquestion', 'fk_idphaseprocedure', 'fk_iduser',
+        fields = ['url', 'idmobilemedia', 'label', 'fk_informationitem', 'fk_idmediatype', 'fk_iduser', 'fk_idknowledgedomain', 'fk_module', 'fk_idinstructionalelement', 'fk_idconcept', 'fk_idquestion', 'fk_idphaseprocedure',
                   'difficultyLevel', 'learningStyle', 'visible', 'path', 'namefile', 'resolution', 'description', 'time', 'textfull', 'textshort', 'urllink', 'mediatypes']
 
 
@@ -238,7 +236,7 @@ class KnowledgedomainSerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     knowledgedomains = KnowledgedomainSerializer(many=True, read_only=True)
-    profile_image = MobilemediaSerializer(many=True, read_only=True)
+    profileimage = MobilemediaSerializer(many=True, read_only=True)
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
@@ -253,28 +251,20 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user.email_user(subject, message)
         return user
 
-
-<< << << < HEAD
-    class Meta:
-        model = User
-        fields = ['id', 'url', 'username', 'email', 'first_name',
-== == ===
     def update(self, instance, validated_data):
 
         old_password, password = validated_data['password'].split("º")
+        print(old_password, password)
         username = validated_data['username']
-
+        print("asdf")
         if username != "0":
             instance.username = username
         if password != "0" and instance.check_password(old_password):
             instance.set_password(password)
         if validated_data.get("first_name"):
-            print("dsd2")
             instance.first_name = validated_data['first_name']
         if validated_data.get("last_name"):
-            print("dsd3")
             instance.last_name = validated_data['last_name']
-        print("dsd")
         instance.is_active = True
 
         instance.save()
@@ -283,8 +273,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'url', 'description', 'city', 'image', 'phone_number', 'username', 'email', 'first_name', 'last_name', 'password', 'is_active', 'knowledgedomains', 'profile_image']
-
+        fields = ['id', 'url', 'description', 'city', 'image', 'phone_number', 'username', 'email', 'first_name',
+                  'last_name', 'password', 'is_active', 'knowledgedomains', 'profileimage']
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
