@@ -1,12 +1,10 @@
-<<<<<<< HEAD
-
-from django.db import models
-from django.contrib.auth.models import User, Group
-
-
-=======
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User, Group
 from django.db import models
+<< << << < HEAD
+
+
+== == == =
 
 
 class User(AbstractUser):
@@ -18,7 +16,10 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
->>>>>>> 8a4d1bc5da85f232fc9afed6d358a7e45a92b863
+
+>>>>>> > 8a4d1bc5da85f232fc9afed6d358a7e45a92b863
+
+
 class Assessmentparameter(models.Model):
     # Field name made lowercase.
     idassessmentparameter = models.AutoField(
@@ -234,6 +235,8 @@ class Mobilemedia(models.Model):
     # Field name made lowercase.
     fk_idmediatype = models.ForeignKey(
         'Mediatype', models.DO_NOTHING, db_column='fk_idMediaType',  blank=True, null=False, related_name='mediatype')
+    fk_iduser = models.ForeignKey(
+        User, db_column='fk_idUser',  blank=True, null=True, related_name='profile_image', on_delete=models.CASCADE)
     fk_idknowledgedomain = models.ForeignKey(
         'Knowledgedomain', db_column='fk_idKnowledgeDomain',  blank=True, null=True, related_name='mobilemedias', on_delete=models.CASCADE)
     # Field name made lowercase.
