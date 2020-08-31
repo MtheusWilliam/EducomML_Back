@@ -275,9 +275,3 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ['id', 'url', 'description', 'city', 'image', 'phone_number', 'username', 'email', 'first_name',
                   'last_name', 'password', 'is_active', 'knowledgedomains', 'profileimage']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
