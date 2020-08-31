@@ -218,6 +218,8 @@ class Mobilemedia(models.Model):
     # Field name made lowercase.
     fk_idmediatype = models.ForeignKey(
         'Mediatype', models.DO_NOTHING, db_column='fk_idMediaType',  blank=True, null=False, related_name='mediatype')
+    fk_iduser = models.ForeignKey(
+        User, db_column='fk_idUser',  blank=True, null=True, related_name='profile_image', on_delete=models.CASCADE)
     fk_idknowledgedomain = models.ForeignKey(
         'Knowledgedomain', db_column='fk_idKnowledgeDomain',  blank=True, null=True, related_name='mobilemedias', on_delete=models.CASCADE)
     # Field name made lowercase.
