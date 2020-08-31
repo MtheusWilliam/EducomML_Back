@@ -1,6 +1,16 @@
-
 from django.db import models
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, AbstractUser
+from django.db import models
+
+
+class User(AbstractUser):
+    description = models.CharField(max_length=100, default='')
+    city = models.CharField(max_length=100, default='')
+    phone_number = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='profile_image', blank=True)
+
+    def __str__(self):
+        return self.email
 
 
 class Assessmentparameter(models.Model):
@@ -219,7 +229,7 @@ class Mobilemedia(models.Model):
     fk_idmediatype = models.ForeignKey(
         'Mediatype', models.DO_NOTHING, db_column='fk_idMediaType',  blank=True, null=False, related_name='mediatype')
     fk_iduser = models.ForeignKey(
-        User, db_column='fk_idUser',  blank=True, null=True, related_name='profile_image', on_delete=models.CASCADE)
+        User, db_column='fk_idUser',  blank=True, null=True, related_name='profileimage', on_delete=models.CASCADE)
     fk_idknowledgedomain = models.ForeignKey(
         'Knowledgedomain', db_column='fk_idKnowledgeDomain',  blank=True, null=True, related_name='mobilemedias', on_delete=models.CASCADE)
     # Field name made lowercase.
@@ -296,8 +306,10 @@ class Priorknowledge(models.Model):
     priorlevel = models.ForeignKey(
         'Priorlevel', db_column='priorLevel', on_delete=models.CASCADE, blank=False, null=False)
     # Field name made lowercase.
-    fk_idconcept = models.ForeignKey(
-        'Concept', db_column='fk_idConcept', blank=False, null=False, related_name='priorknowledge', on_delete=models.CASCADE)
+    fk_priorsourceconcept = models.ForeignKey(
+        'Concept', db_column='fk_priorSourceConcept', blank=False, null=False, related_name='priorknowledge', on_delete=models.CASCADE)
+    fk_priortargetconcept = models.ForeignKey(
+        'Concept', db_column='fk_priorTargetConcept', related_name='targetpriorknowledge', blank=False, null=False, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'PriorKnowledge'
@@ -461,4 +473,3 @@ class Typethreshold(models.Model):
         db_column='nameTypeThreshold', max_length=256, blank=False, null=False)
 
     class Meta:
-        db_table = 'TypeThreshold'
