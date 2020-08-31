@@ -472,4 +472,13 @@ class Typethreshold(models.Model):
     nametypethreshold = models.CharField(
         db_column='nameTypeThreshold', max_length=256, blank=False, null=False)
 
+class Typethreshold(models.Model):
+    # Field name made lowercase.
+    idtypethreshold = models.AutoField(
+        db_column='idTypeThreshold', primary_key=True)
+    # Field name made lowercase.
+    nametypethreshold = models.CharField(
+        db_column='nameTypeThreshold', max_length=256, blank=False, null=False)
+
     class Meta:
+        db_table = 'TypeThreshold'
