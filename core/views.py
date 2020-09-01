@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, get_user_model
 from .models import *
 from rest_framework import viewsets
