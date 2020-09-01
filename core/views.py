@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, get_user_model
 from .models import *
 from rest_framework import viewsets
@@ -124,6 +124,17 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    authentication_class = [JSONWebTokenAuthentication,
+                            authentication.SessionAuthentication, authentication.BasicAuthentication]
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    authentication_class = [JSONWebTokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    
 class KnowledgedomainViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
