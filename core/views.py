@@ -1,3 +1,4 @@
+
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, get_user_model
 from .models import *
@@ -12,7 +13,6 @@ from rest_framework_jwt.settings import api_settings
 from .serializers import *
 
 from django.contrib.auth import login
-from django.contrib.auth.models import User
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from core.tokens import account_activation_token
