@@ -239,15 +239,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
-        user.is_active = False
-        subject = "Email de confirmação | Confirme seu cadastro na plataforma EducomML"
-        message = render_to_string('email_template.html', {
-            'user': user,
-            'domain': 'educomml-back.herokuapp.com',
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            'token': account_activation_token.make_token(user),
-        })
-        user.email_user(subject, message)
         return user
 
     def update(self, instance, validated_data):
