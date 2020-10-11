@@ -247,6 +247,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
+        user.email_user()
         return user
 
     def update(self, instance, validated_data):
