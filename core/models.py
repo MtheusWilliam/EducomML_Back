@@ -7,7 +7,7 @@ from django.core.mail import EmailMessage
 class User(AbstractUser):
     description = models.CharField(max_length=100, default='')
     city = models.CharField(max_length=100, default='')
-    phone_number = models.IntegerField(default=0)
+    phoneNumber = models.IntegerField(default=0)
     image = models.ImageField(upload_to='profile_image', blank=True)
 
     def __str__(self):
@@ -19,9 +19,7 @@ class User(AbstractUser):
             '{}'.format(args[1]),
             to=[self.email],
         )
-        print("dsaf")
         msg.send()
-        print("dsf")
         return msg
 
 class Assessmentparameter(models.Model):
@@ -484,3 +482,5 @@ class Typethreshold(models.Model):
 
     class Meta:
         db_table = 'TypeThreshold'
+
+
