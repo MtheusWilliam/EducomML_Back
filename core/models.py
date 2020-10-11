@@ -19,7 +19,6 @@ class User(AbstractUser):
             '{}'.format(args[1]),
             to=[self.email],
         )
-        msg.send()
         return msg
 
 class Assessmentparameter(models.Model):
