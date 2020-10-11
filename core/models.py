@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import Group, AbstractUser
 from django.db import models
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail
 
 
 class User(AbstractUser):
@@ -13,10 +13,10 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
-    def email_user(self, *args, **kwargs):
+    def email_user(self, subject, message,*args, **kwargs):
         msg = EmailMessage(
-            '{}'.format(args[0]),
-            '{}'.format(args[1]),
+            '{}'.format(subject),
+            '{}'.format(message),
             to=[self.email],
         )
         msg.send()
