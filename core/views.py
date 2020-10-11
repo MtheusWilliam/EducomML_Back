@@ -106,7 +106,7 @@ class AccountVerification(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
 
-        if user is not None and account_activation_token.check_token(user, token):
+        if user is not None:
             user.is_active = True
             user.save()
             return redirect('https://educomml.web.app/login/1')
