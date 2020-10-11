@@ -14,11 +14,6 @@ class User(AbstractUser):
         return self.email
 
     def email_user(self, *args, **kwargs):
-        msg = EmailMessage(
-            '{}'.format(args[0]),
-            '{}'.format(args[1]),
-            to=[self.email],
-        )
         return msg
 
 class Assessmentparameter(models.Model):
