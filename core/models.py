@@ -40,7 +40,6 @@ class Assessmentparameter(models.Model):
         'Concept', blank=False, null=True, db_column='fk_idConcept', on_delete=models.CASCADE, related_name="assessmentparameter")
 
     class Meta:
-        db_table = 'AssessmentParameter'
         ordering = ['idassessmentparameter']
 
 
@@ -62,7 +61,6 @@ class Answersalternatives(models.Model):
         db_column='orderAnswerAlternatives', blank=True, null=True)
 
     class Meta:
-        db_table = 'AnswersAlternatives'
         ordering = ['orderansweralternatives']
 
 
@@ -86,7 +84,6 @@ class Concept(models.Model):
         db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
-        db_table = 'Concept'
         ordering = ['idconcept']
 
 
@@ -110,7 +107,6 @@ class Informationitem(models.Model):
         db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
-        db_table = 'InformationItem'
         ordering = ['idinformationitem']
 
 
@@ -137,9 +133,6 @@ class Instrucelementtype(models.Model):
     idcategory = models.BigIntegerField(
         db_column='idCategory', blank=True, null=True)
 
-    class Meta:
-        db_table = 'InstrucElementType'
-
 
 class Instructionalelement(models.Model):
     idinstructionalelement = models.AutoField(
@@ -165,7 +158,6 @@ class Instructionalelement(models.Model):
         db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
-        db_table = 'InstructionalElement'
         ordering = ['idinstructionalelement']
 
 
@@ -189,7 +181,6 @@ class Knowledgedomain(models.Model):
         User, db_column='fk_idUser', blank=False, null=False, related_name='knowledgedomains', on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'KnowledgeDomain'
         ordering = ['idknowledgedomain']
 
 
@@ -198,9 +189,6 @@ class Mediatype(models.Model):
     # Field name made lowercase.
     namemediatype = models.CharField(
         db_column='nameMediaType', max_length=256, blank=True, null=False)
-
-    class Meta:
-        db_table = 'MediaType'
 
 
 class Module(models.Model):
@@ -222,7 +210,6 @@ class Module(models.Model):
         db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
-        db_table = 'Module'
         ordering = ['idmodule']
 
 
@@ -287,7 +274,6 @@ class Mobilemedia(models.Model):
         db_column='visible', default=True, blank=True, null=True)
 
     class Meta:
-        db_table = 'MobileMedia'
         ordering = ['idmobilemedia']
 
 
@@ -303,7 +289,6 @@ class Phaseprocedure(models.Model):
         Informationitem, db_column='fk_InformationItem', related_name='phaseprocedures', on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'PhaseProcedure'
         ordering = ['order']
 
 
@@ -322,7 +307,6 @@ class Priorknowledge(models.Model):
         'Concept', db_column='fk_priorTargetConcept', related_name='targetpriorknowledge', blank=False, null=False, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'PriorKnowledge'
         ordering = ['idpriorknowledge']
 
 
@@ -334,7 +318,6 @@ class Priorlevel(models.Model):
         db_column='typePriorLevel', max_length=256, blank=False, null=False)
 
     class Meta:
-        db_table = 'PriorLevel'
         ordering = ['idpriorlevel']
 
 
@@ -357,7 +340,6 @@ class Question(models.Model):
         'InstructionalElement', db_column='fk_idInstructionalElement', blank=True, null=True, on_delete=models.CASCADE, related_name='questions')  # Field name made lowercase.
 
     class Meta:
-        db_table = 'Question'
         ordering = ['orderquestion']
 
 
@@ -368,10 +350,6 @@ class Questiontype(models.Model):
     # Field name made lowercase.
     namequestiontype = models.CharField(
         db_column='nameQuestionType', max_length=256, blank=False, null=False)
-
-    class Meta:
-        db_table = 'QuestionType'
-
 
 class Range(models.Model):
     # Field name made lowercase.
@@ -390,10 +368,6 @@ class Range(models.Model):
     limitvalue = models.IntegerField(
         db_column='limitValue', blank=False, null=False)
 
-    class Meta:
-        db_table = 'Range'
-
-
 class Resolutionquestion(models.Model):
     # Field name made lowercase.
     idresolutionquestion = models.AutoField(
@@ -407,10 +381,6 @@ class Resolutionquestion(models.Model):
     # Field name made lowercase.
     fk_idquestion = models.ForeignKey(
         'Question', db_column='fk_idQuestion', blank=True, null=True, on_delete=models.CASCADE, related_name='resolutionquestion')  # Field name made lowercase.
-
-    class Meta:
-        db_table = 'ResolutionQuestion'
-
 
 class Reference(models.Model):
     # Field name made lowercase.
@@ -429,10 +399,6 @@ class Reference(models.Model):
     namereference = models.CharField(
         db_column='nameReference', max_length=256, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Reference'
-
-
 class Referencetype(models.Model):
     # Field name made lowercase.
     idreferencetype = models.AutoField(
@@ -440,10 +406,6 @@ class Referencetype(models.Model):
     # Field name made lowercase.
     namererefencetype = models.CharField(
         db_column='nameRerefenceType', max_length=256)
-
-    class Meta:
-        db_table = 'Referencetype'
-
 
 class Single(models.Model):
     # Field name made lowercase.
@@ -456,9 +418,6 @@ class Single(models.Model):
     threshold = models.CharField(
         db_column='threshold', max_length=256, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Single'
-
 # testingheroku
 
 
@@ -469,9 +428,6 @@ class Scopo(models.Model):
     # Field name made lowercase.
     typescopo = models.CharField(
         db_column='typeScopo', max_length=256, blank=False, null=False)
-
-    class Meta:
-        db_table = 'Scopo'
         
 class Typethreshold(models.Model):
     # Field name made lowercase.
@@ -481,5 +437,3 @@ class Typethreshold(models.Model):
     nametypethreshold = models.CharField(
         db_column='nameTypeThreshold', max_length=256, blank=False, null=False)
 
-    class Meta:
-        db_table = 'TypeThreshold'
