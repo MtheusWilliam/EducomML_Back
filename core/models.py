@@ -13,10 +13,10 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
-    def email_user(self, *args, **kwargs):
+    def email_user(self, sub, mes, *args, **kwargs):
         msg = EmailMessage(
-            '{}'.format(args[0]),
-            '{}'.format(args[1]),
+            '{}'.format(sub),
+            '{}'.format(mes),
             to=[self.email],
         )
         msg.send()
