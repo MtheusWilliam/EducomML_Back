@@ -168,7 +168,6 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 ]
 
 DEFAULT_FROM_EMAIL = 'testeeducommlback@gmail.com'
-SERVER_EMAIL = 'testeeducommlback@gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'
