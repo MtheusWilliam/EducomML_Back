@@ -87,7 +87,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'bd_educomml',
         'USER': 'postgres',
-        'PASSWORD': '8729mM.@',
+        #'PASSWORD': '8729mM.@',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT':  '5432',
     }
@@ -154,7 +155,6 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
-    'X-CSRFTOKEN',
     'Access-Control-Allow-Origin',
     'accept',
     'accept-encoding',
@@ -167,13 +167,19 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     'x-requested-with',
 ]
 
+DEFAULT_FROM_EMAIL = 'testeeducommlback@gmail.com'
+SERVER_EMAIL = 'testeeducommlback@gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'testeeducommlback@gmail.com'
 EMAIL_HOST_PASSWORD = 'incorreta!2'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+<<<<<<< HEAD
+AUTH_USER_MODEL = 'core.User' # new
+=======
 AUTH_USER_MODEL = 'core.User' #new
+>>>>>>> 5395b871feef1c982c21c19a8c37c15a94d98d2c
 
 # HEROKU
 django_heroku.settings(locals())

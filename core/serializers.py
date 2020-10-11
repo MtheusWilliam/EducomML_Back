@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .models import *
 from django.contrib import messages
@@ -244,7 +243,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         subject = "Email de confirmação | Confirme seu cadastro na plataforma EducomML"
         message = render_to_string('email_template.html', {
             'user': user,
-            'domain': 'localhost:8000',
+            'domain': 'educomml-back.herokuapp.com',
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
@@ -252,7 +251,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
     def update(self, instance, validated_data):
+<<<<<<< HEAD
+=======
 
+>>>>>>> 5395b871feef1c982c21c19a8c37c15a94d98d2c
         old_password, password = validated_data['password'].split("º")
         print(old_password, password)
         username = validated_data['username']
@@ -275,6 +277,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ['id', 'url', 'description', 'city', 'image', 'phone_number', 'username', 'email', 'first_name',
                   'last_name', 'password', 'is_active', 'knowledgedomains', 'profileimage']
+<<<<<<< HEAD
+
+=======
+>>>>>>> 5395b871feef1c982c21c19a8c37c15a94d98d2c
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

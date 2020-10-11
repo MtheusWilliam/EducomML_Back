@@ -1,6 +1,12 @@
 from django.db import models
+<<<<<<< HEAD
+from django.contrib.auth.models import Group, AbstractUser
+from django.db import models
+from django.core.mail import EmailMessage
+=======
 from django.contrib.auth.models import User, AbstractUser, Group
 from django.db import models
+>>>>>>> 5395b871feef1c982c21c19a8c37c15a94d98d2c
 
 
 class User(AbstractUser):
@@ -8,10 +14,26 @@ class User(AbstractUser):
     city = models.CharField(max_length=100, default='')
     phone_number = models.IntegerField(default=0)
     image = models.ImageField(upload_to='profile_image', blank=True)
+<<<<<<< HEAD
+=======
+
+    def __str__(self):
+        return self.email
+>>>>>>> 5395b871feef1c982c21c19a8c37c15a94d98d2c
 
     def __str__(self):
         return self.email
 
+    def email_user(self, *args, **kwargs):
+        msg = EmailMessage(
+            '{}'.format(args[0]),
+            '{}'.format(args[1]),
+            to=[self.email],
+        )
+        print("dsaf")
+        msg.send()
+        print("dsf")
+        return msg
 
 class Assessmentparameter(models.Model):
     # Field name made lowercase.
