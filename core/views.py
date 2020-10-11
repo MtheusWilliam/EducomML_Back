@@ -123,20 +123,6 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-<<<<<<< HEAD
-=======
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    authentication_class = [JSONWebTokenAuthentication,
-                            authentication.SessionAuthentication, authentication.BasicAuthentication]
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    authentication_class = [JSONWebTokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
-    
->>>>>>> 5395b871feef1c982c21c19a8c37c15a94d98d2c
 class KnowledgedomainViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
