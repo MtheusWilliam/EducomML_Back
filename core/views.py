@@ -23,7 +23,6 @@ from rest_framework.authtoken.models import Token
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
-
 @api_view(['POST'])
 @authentication_classes([JSONWebTokenAuthentication])
 def UserId(request):
@@ -33,7 +32,7 @@ def UserId(request):
     id = User.id
     name = User.first_name+" "+User.last_name
     response.data = {
-        'url': "http://localhost:8000/users/"+str(id)+"/",
+        'url': "https://educomml-back.herokuapp.com/users/"+str(id)+"/",
         'complete_name': name
     }
     return response
@@ -49,7 +48,7 @@ def ResetPassword(request):
         subject = "Redefinição de senha | EducomML"
         message = render_to_string('reset_password.html', {
             'user': user,
-            'domain': 'localhost:8000',
+            'domain': 'https://educomml-back.herokuapp.com',
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
@@ -93,8 +92,8 @@ class ResetPasswordRedirect(View):
             username = user.username
             payload = jwt_payload_handler(user)
             token = jwt_encode_handler(payload)
-            return redirect('http://localhost:8080/reset_password/%s/%s' % (username, token))
-        return redirect('http://localhost:8080/')
+            return redirect('https://educomml.web.app/reset_password/%s/%s' % (username, token))
+        return redirect('https://educomml.web.app/')
 
 
 class AccountVerification(View):
@@ -110,8 +109,8 @@ class AccountVerification(View):
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
-            return redirect('http://localhost:8080/login/1')
-        return redirect('http://localhost:8080/login/0')
+            return redirect('https://educomml.web.app/login/1')
+        return redirect('https://educomml.web.app/login/0')
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -124,6 +123,20 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+<<<<<<< HEAD
+=======
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    authentication_class = [JSONWebTokenAuthentication,
+                            authentication.SessionAuthentication, authentication.BasicAuthentication]
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    authentication_class = [JSONWebTokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    
+>>>>>>> 5395b871feef1c982c21c19a8c37c15a94d98d2c
 class KnowledgedomainViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.

@@ -251,6 +251,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
     def update(self, instance, validated_data):
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5395b871feef1c982c21c19a8c37c15a94d98d2c
         old_password, password = validated_data['password'].split("º")
         print(old_password, password)
         username = validated_data['username']
@@ -273,7 +277,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ['id', 'url', 'description', 'city', 'image', 'phone_number', 'username', 'email', 'first_name',
                   'last_name', 'password', 'is_active', 'knowledgedomains', 'profileimage']
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5395b871feef1c982c21c19a8c37c15a94d98d2c
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

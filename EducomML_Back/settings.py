@@ -175,7 +175,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'testeeducommlback@gmail.com'
 EMAIL_HOST_PASSWORD = 'incorreta!2'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+<<<<<<< HEAD
 AUTH_USER_MODEL = 'core.User' # new
+=======
+AUTH_USER_MODEL = 'core.User' #new
+>>>>>>> 5395b871feef1c982c21c19a8c37c15a94d98d2c
 
 # HEROKU
 django_heroku.settings(locals())
