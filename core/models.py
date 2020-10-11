@@ -7,6 +7,7 @@ from django.core.mail import EmailMessage
 class User(AbstractUser):
     description = models.CharField(max_length=100, default='')
     city = models.CharField(max_length=100, default='')
+    phoneNumber = models.IntegerField(default=0)
     image = models.ImageField(upload_to='profile_image', blank=True)
 
     def __str__(self):
