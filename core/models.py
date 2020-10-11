@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User, Group, AbstractUser
+from django.contrib.auth.models import Group, AbstractUser
 from django.db import models
+from django.core.mail import EmailMessage
 
 
 class User(AbstractUser):
@@ -12,6 +13,16 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
+    def email_user(self, *args, **kwargs):
+        msg = EmailMessage(
+            '{}'.format(args[0]),
+            '{}'.format(args[1]),
+            to=[self.email],
+        )
+        print("dsaf")
+        msg.send()
+        print("dsf")
+        return msg
 
 class Assessmentparameter(models.Model):
     # Field name made lowercase.

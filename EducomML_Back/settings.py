@@ -87,7 +87,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'bd_educomml',
         'USER': 'postgres',
-        'PASSWORD': '8729mM.@',
+        #'PASSWORD': '8729mM.@',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT':  '5432',
     }
@@ -166,6 +167,8 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     'x-requested-with',
 ]
 
+DEFAULT_FROM_EMAIL = 'testeeducommlback@gmail.com'
+SERVER_EMAIL = 'testeeducommlback@gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'
